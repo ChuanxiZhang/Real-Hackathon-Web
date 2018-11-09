@@ -82,7 +82,7 @@ new Vue({
     },
     getImageUrl() {
       return function(recipe) {
-        return recipe.image_url ? recipe.image_url : "https://fussiesdoodles.co.uk/wp-content/uploads/2015/06/noImageAvailable.jpg";
+        return recipe.image_url ? recipe.image_url : "img/noImage.jpg";
       }
     },
     getSocialRank() {

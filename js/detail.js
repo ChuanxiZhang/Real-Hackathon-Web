@@ -62,7 +62,7 @@ new Vue({
       return this.recipe.recipe_id?this.recipe.recipe_id:0;
     },
     getImageUrl(){
-      return this.recipe.image_url?this.recipe.image_url:"https://fussiesdoodles.co.uk/wp-content/uploads/2015/06/noImageAvailable.jpg";
+      return this.recipe.image_url?this.recipe.image_url:"img/noImage.jpg";
     },
     getSocialRank(){
       return this.recipe.social_rank?this.recipe.social_rank:0;
