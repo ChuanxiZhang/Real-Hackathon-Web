@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="referrer" content ="never">
+    <title>Hackathon Project#3 - Recipe Search</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="css/landing-page.css" rel="stylesheet">
+  <script src="js/vue.js"></script>
+  <!-- <script src="js/lineclamp.js"></script> -->
+</head>
+
+<body>
+  <div id="index_vue">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-light bg-light static-top">
+      <div class="container">
+
+        <a class="navbar-brand" href="#">Recipe Search</a>
+        <a class="btn btn-primary" :href="itemUrl()" style="background-color: #de2e1c; border-color: #de2e1c;">Item List</a>
+
+      </div>
+    </nav>
+
+    <!-- Masthead -->
+    <header class="masthead text-white text-center">
+      <div class="overlay"></div>
+      <div class="container under">
+        <br/>
+        <div class="row upper justify-content-center">
+          <div class="col-12 col-md-10 col-lg-8">
+            <form class="card card-sm" @submit.prevent="handleSubmit">
+              <div class="card-body row no-gutters align-items-start"style="height:100%">
+                   <div class="col-auto">
+                      <i class="fas fa-search h4 text-body"></i>
+                    </div>
+                  <div class="col">
+                      <div style="width:100%;height:100%">
+                      <input
+                       class="form-control  form-control-borderless"
+                        v-model="name"
+                        placeholder="enter things..."
+                        @keyup.down="calMatchListIndex(1)"
+                        @keyup.up="calMatchListIndex(-1)"
+                        @click="resetMatchList"
+                        @blur="clearMatchList"
+                        />
+                      </div>
+                    <div style="background:white; width:100%;height:100%">
+                      <div  v-for="(item, index) in matchList">
+                        <p style="color:#000;"
+                          :class="{'item-selected': isSelected(index)}"
+                          @mouseenter="setMatchListIndex(index)">
+                        {{item}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-auto align-items-start">
+                    <button class="btn btn-lg btn-danger" type="submit">Search</button>
+                  </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Icons Grid -->
+    <section class="features-icons bg-light text-left">
+      <div class="container">
+        <div class="card-columns">
+          <div  v-for="recipe in recipes" class="card">
+            <a :href="url(recipe.recipe_id)"><img v-bind:src="recipe.image_url" width="100%" style="border-radius: 25px;" :href="url(recipe.recipe_id)"></img></a>
+            <div style="padding:0% 5% 0% 5%">
+            <div style="padding-top:2%" class="card-block">
+              <h4 class="card-title"><a :href="url(recipe.recipe_id)" style="color: black;">{{recipe.title}}</a></h4>
+              <div >
+                <span v-if="recipe.social_rank == 100"><five-star></five-star></span>
+                <span v-else-if="recipe.social_rank >95 && recipe.social_rank < 100"><fourhalf-star></fourhalf-star></span>
+                <span v-else-if="recipe.social_rank >90 && recipe.social_rank < 95"><four-star></four-star></span>
+                <span v-else-if="recipe.social_rank >85 && recipe.social_rank < 90"><threehalf-star></threehalf-star></span>
+                <span v-else-if="recipe.social_rank >80 && recipe.social_rank < 85"><three-star></three-star></span>
+                <span v-else-if="recipe.social_rank >75 && recipe.social_rank < 80"><twohalf-star></twohalf-star></span>
+                <span v-else><two-star></two-star></div><br/>
+                <span><button class="btn btn-like btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button></span>
+              </div>
+              <p  class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. --<cite title="Source Title">Mark James</cite></p>
+              <p style="padding-bottom:2%" class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+            </div>
+            <!-- <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <a :href="url(recipe.recipe_id)"><img v-bind:src="recipe.image_url" width="300px" style="border-radius: 25px;" :href="url(recipe.recipe_id)"></img></a>
+              </div>
+              <div>
+                <p class="lead mb-0" id="clampjs"><a :href="url(recipe.recipe_id)" style="color: black;">{{recipe.title}}</a></p>
+              </div>
+              <div>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span><button class="btn btn-like btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button></span>
+              </div> -->
+              <!-- <strong>Beat {{scaleData(recipe.social_rank)}}</strong><br/> -->
+              <!-- <p class="lead mb-0">recipe_id:{{recipe.recipe_id}}</p> -->
+              <!-- <p class="lead mb-0">f2f_url:{{recipe.f2f_url}}</p> -->
+              <!-- <p class="lead mb-0">source_url:{{recipe.source_url}}</p> -->
+              <!-- <p class="lead mb-0"><i class="fa fa-home" aria-hidden="true" style="color: #de2e1c;"></i><font color="#de2e1c">{{recipe.publisher}}</font></p> -->
+              <!-- <a @click="like(recipe.title)">like</a> -->
+              <!-- <button class="btn btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button> -->
+              <!-- <div class="btn-group">
+                <a class="btn btn-primary" :href="url(recipe.recipe_id)"><i class="fa fa-search-minus" aria-hidden="true"></i> Take a look</a>
+              </div> -->
+            </div>
+          </div>
+
+    </section>
+    <div class="container">
+
+      <a class="btn btn-primary" @click="prior" style="color: white">prior</a >
+      <a class="navbar-brand"> page {{this.page}}</a >
+      <a class="btn btn-primary" @click="next" style="color: white">next</a >
+
+    </div>
+  </nav>
+
+    <!-- Testimonials -->
+    <section class="testimonials text-center bg-light">
+
+      <div class="container">
+        <h2 class="mb-5">What people are saying...</h2>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="img/testimonials-1.jpg" alt="">
+              <h5>Margaret E.</h5>
+              <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="img/testimonials-2.jpg" alt="">
+              <h5>Fred S.</h5>
+              <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of super nice landing pages."</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="img/testimonials-3.jpg" alt="">
+              <h5>Sarah W.</h5>
+              <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to us!"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+            <ul class="list-inline mb-2">
+              <li class="list-inline-item">
+                <a href="#">About</a>
+              </li>
+              <li class="list-inline-item">&sdot;</li>
+              <li class="list-inline-item">
+                <a href="#">Contact</a>
+              </li>
+              <li class="list-inline-item">&sdot;</li>
+              <li class="list-inline-item">
+                <a href="#">Terms of Use</a>
+              </li>
+              <li class="list-inline-item">&sdot;</li>
+              <li class="list-inline-item">
+                <a href="#">Privacy Policy</a>
+              </li>
+            </ul>
+            <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2018. All Rights Reserved.</p>
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item mr-3">
+                <a href="#">
+                  <i class="fab fa-facebook fa-2x fa-fw"></i>
+                </a>
+              </li>
+              <li class="list-inline-item mr-3">
+                <a href="#">
+                  <i class="fab fa-twitter-square fa-2x fa-fw"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fab fa-instagram fa-2x fa-fw"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="js/ajax.js"></script>
+  <script src="js/index.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+</body>
+
+</html>

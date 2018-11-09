@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="referrer" content ="never">
+    <title>Recipe Details</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/landing-page.min.css" rel="stylesheet">
+    <script src="js/vue.js"></script>
+  </head>
+
+  <body>
+  <div id="fb-root"></div>
+
+  <div id ="detail_vue">
+    <!-- Navigation -->
+    <nav class="navbar navbar-light bg-light static-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html"><h3>Recipe Search</h3></a>
+        <a class="btn btn-danger" :href="itemUrl()" style="background-color: #de2e1c; border-color: #de2e1c;">Item List</a>
+      </div>
+    </nav>
+
+    <!-- <p>{{recipe.publisher}}</p>
+    <p>{{recipe.recipe_id}}</p> -->
+
+    <!-- Image Showcases -->
+    <section class="showcase">
+      <div class="container-fluid p-0">
+        <div class="row no-gutters">
+          <!-- should change variable in url() in {{recipt.image_url}}-->
+          <div class="col-lg-6 text-white showcase-img">
+            <img v-if="recipe.image_url != null" v-bind:src="recipe.image_url" height=400px style="position: absolute; top: 120px; right: 60px;"></img>
+            <img v-else src="http://static.food2fork.com/Jalapeno2BPopper2BGrilled2BCheese2BSandwich2B12B500fd186186.jpg" height=400px style="position: absolute; top: 120px; right: 60px;"></img>
+          </div>
+
+          <div class="col-lg-6 my-auto showcase-text">
+            <h1>{{recipe.title}}</h1>
+            <div>
+              <div v-if="recipe.social_rank == 100"><five-star></five-star></div>
+              <div v-else-if="recipe.social_rank >95 && recipe.social_rank < 100"><fourhalf-star></fourhalf-star><span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span></div>
+              <div v-else-if="recipe.social_rank >90 && recipe.social_rank < 95"><four-star></four-star><span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span></div>
+              <div v-else-if="recipe.social_rank >85 && recipe.social_rank < 90"><threehalf-star></threehalf-star><span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span></div>
+              <div v-else-if="recipe.social_rank >80 && recipe.social_rank < 85"><three-star></three-star><span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span></div>
+              <div v-else-if="recipe.social_rank >75 && recipe.social_rank < 80"><twohalf-star></twohalf-star><span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span></div>
+              <div v-else><two-star></two-star><span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span></div>
+            </div><br/>
+            <!-- TODO: change logo based whether saved or not -->
+            <div class="btn-group">
+              <button class="btn btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-bookmark fa-sm" aria-hidden="true"></i>Favorite</button>
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-success" v-on:click="save_item"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <font color="white">Buy Ingredients</font></button>
+            </div>
+            <br/><br/>
+            <div class="col-lg-0"><i class="fa fa-home" aria-hidden="true" style="color: #de2e1c;"></i><font color="#de2e1c">{{recipe.publisher}}</font></div><br/>
+            <div class="col-lg-0"><i class="fa fa-book" aria-hidden="true" style="color: #c2ad81;"></i>&nbsp<a :href="recipe.source_url" style="color: #c2ad81;">Cook Tutorial</a></div><br/>
+
+            <div class="col-lg-0"><a id="ingredients" href="#" data-toggle="collapse" data-target="#detail_ingredients" style="color: #c2ad81;"><i class="fa fa-chevron-right" aria-hidden="true" style="color: #c2ad81;"></i>&nbspIngredients</a></div><br/>
+            <div id = "detail_ingredients" v-for = "ingredient in recipe.ingredients" class="col-md-0 collapse in" >
+                <a>&nbsp&nbsp&nbsp&nbsp<i class="fa fa-check" aria-hidden="true" style></i>
+&nbsp&nbsp{{ingredient}}</a>
+            </div><br/>
+            <div class="form-group">
+              <textarea type="text" class="form-control" id="usercomment" aria-describedby="Help" placeholder="Enter your comment" rows="2"></textarea>
+              <small id="Help" class="form-text text-muted">We'll never share your personal information with anyone else.</small>
+            </div>
+            <div class="span1 text-left">
+              <div class="btn-group">
+                <button class="btn btn-primary" href="index.html" style="background-color: #3B5998; border-color: #3B5998;">
+                  <font color="white"><i class="fa fa-share fa-sm" aria-hidden="true"></i>Submit</font></button>
+              </div>
+              <div class="btn-group">
+                <button class="btn btn-warning" href="index.html">
+                  <font color="white"><i class="fa fa-share fa-sm" aria-hidden="true"></i>Go Back</font></button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+            <ul class="list-inline mb-2">
+              <li class="list-inline-item">
+                <a href="#" style="color: #de2e1c;">About</a>
+              </li>
+              <li class="list-inline-item">&sdot;</li>
+              <li class="list-inline-item">
+                <a href="#" style="color: #de2e1c;">Contact</a>
+              </li>
+              <li class="list-inline-item">&sdot;</li>
+              <li class="list-inline-item">
+                <a href="#" style="color: #de2e1c;">Terms of Use</a>
+              </li>
+              <li class="list-inline-item">&sdot;</li>
+              <li class="list-inline-item">
+                <a href="#" style="color: #de2e1c;">Privacy Policy</a>
+              </li>
+            </ul>
+            <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2018. All Rights Reserved.</p>
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item mr-3">
+                <a href="#">
+                  <i class="fab fa-facebook fa-2x fa-fw" style="color: #de2e1c;"></i>
+                </a>
+              </li>
+              <li class="list-inline-item mr-3">
+                <a href="#">
+                  <i class="fab fa-twitter-square fa-2x fa-fw" style="color: #de2e1c;"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fab fa-instagram fa-2x fa-fw" style="color: #de2e1c;"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/ajax.js"></script>
+    <script src="js/detail.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/zh_CN/sdk.js#xfbml=1&version=v3.2';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+  </body>
+</html>
