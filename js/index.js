@@ -30,87 +30,127 @@ Vue.component('two-star', {
   template: '<span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></span>'
 })
 new Vue({
-    el: '#index_vue',
-    data: {
-      count: 0,
-      recipes: [],
-      name: "",
-      page: 1,
-      nameList: ["apple", "pear", "chicken", "artichoke","asparagus","beetroot","pepper","broccoli","brussels","sprouts",
-          "cabbage","carrot","cauliflower","celery","cucumber","eggplant","garlic","lettuce","mushroom","onion","peas","potato",
-          "pumpkin","spinach","turnip","yam","zucchini","salad","apricot","avocado","banana","blackberry","muskmelon","cherry",
-          "fig","grapes","olive","kiwi","lemon","lime","mango","mangosteen","orange","papaya","peach","pineapple","plum","raisin",
-          "strawberry","tomato","watermelon","almonds","bread","cereal","nuts","cashew","chickpeas","chestnut","coconut","beans","corn",
-          "maize","flour","legumes","lentils","lima","oatmeal","milk","peanuts","pinto","pistachios","rice","tortilla","walnuts",
-          "wheat","taco","hamburger","sandwich","bacon","beef","ribs","breast","drumsticks","wings","meat","goat","lamb","duck","fillet",
-          "ham","liver","pork","mutton","tongue","heart","ox","leg","sausages","T-bone","tripe","turkey","carp","caviar","cod","crab",
-          "crayfish","eel","snapper","lobster","mussels","octopus","oysters","periwinkles","winkles","prawn","salmon","roe","sardines",
-          "scallop","shrimp","fish","squid","trout","tuna","steak","cheese","butter","camembert","cream","ice-cream","yogurt","gelato",
-          "milk","chips","noodles","dumplings","hotpot","pho","barbecue"],
-      maxCount: 8,
-      matchList: [],
-      matchListIndex: null,
-      saved:[],
-      like_flag:false,
+  el: '#index_vue',
+  data: {
+    count: 0,
+    recipes: [],
+    name: "",
+    page: 1,
+    nameList: ["apple", "pear", "chicken", "artichoke", "asparagus", "beetroot", "pepper", "broccoli", "brussels", "sprouts",
+      "cabbage", "carrot", "cauliflower", "celery", "cucumber", "eggplant", "garlic", "lettuce", "mushroom", "onion", "peas", "potato",
+      "pumpkin", "spinach", "turnip", "yam", "zucchini", "salad", "apricot", "avocado", "banana", "blackberry", "muskmelon", "cherry",
+      "fig", "grapes", "olive", "kiwi", "lemon", "lime", "mango", "mangosteen", "orange", "papaya", "peach", "pineapple", "plum", "raisin",
+      "strawberry", "tomato", "watermelon", "almonds", "bread", "cereal", "nuts", "cashew", "chickpeas", "chestnut", "coconut", "beans", "corn",
+      "maize", "flour", "legumes", "lentils", "lima", "oatmeal", "milk", "peanuts", "pinto", "pistachios", "rice", "tortilla", "walnuts",
+      "wheat", "taco", "hamburger", "sandwich", "bacon", "beef", "ribs", "breast", "drumsticks", "wings", "meat", "goat", "lamb", "duck", "fillet",
+      "ham", "liver", "pork", "mutton", "tongue", "heart", "ox", "leg", "sausages", "T-bone", "tripe", "turkey", "carp", "caviar", "cod", "crab",
+      "crayfish", "eel", "snapper", "lobster", "mussels", "octopus", "oysters", "periwinkles", "winkles", "prawn", "salmon", "roe", "sardines",
+      "scallop", "shrimp", "fish", "squid", "trout", "tuna", "steak", "cheese", "butter", "camembert", "cream", "ice-cream", "yogurt", "gelato",
+      "milk", "chips", "noodles", "dumplings", "hotpot", "pho", "barbecue"
+    ],
+    maxCount: 8,
+    matchList: [],
+    matchListIndex: null,
+    saved: [],
+    like_flag: false,
+  },
+  computed: {
+    getPublisher() {
+      return function(recipe) {
+        return recipe.publisher ? recipe.publisher : "No publisher";
+      }
     },
-    computed:{
-
+    getF2fUrl() {
+      return function(recipe) {
+        return recipe.f2f_url ? recipe.f2f_url : "error_page.html";
+      }
     },
-    methods: {
-      handleSubmit() {
-        var obj = AJAX([this.name, this.page], "search");
-        this.recipes = obj.recipes;
-      },
-      url(id) {
-        return "detail.html?id=" + id;
-      },
-      itemUrl(){
-        return "itemList.html";
-      },
-      like(title){
-        this.saved = JSON.parse(localStorage.getItem("favor"));
-        if (this.saved == null){
-          this.saved = [];
-        }
-        this.saved.push(title);
-        localStorage.setItem("favor", JSON.stringify(this.saved));
-      },
-      islike(title){
-        this.saved = JSON.parse(localStorage.getItem("favor"));
-        if (this.saved == null){
-          return false;
-        }
-        for (var i = 0; i < this.saved.length; i++) {
-          if (this.saved[i] == title) {
-            return true;
-          }
-        }
+    getTitle() {
+      return function(recipe) {
+        return recipe.title ? recipe.title : "No title";
+      }
+    },
+    getSourceUrl() {
+      return function(recipe) {
+        return recipe.source_url ? recipe.source_url : "error_page.html";
+      }
+    },
+    getRecipe_id() {
+      return function(recipe) {
+        return recipe.recipe_id ? recipe.recipe_id : 0;
+      }
+    },
+    getImageUrl() {
+      return function(recipe) {
+        return recipe.image_url ? recipe.image_url : "https://fussiesdoodles.co.uk/wp-content/uploads/2015/06/noImageAvailable.jpg";
+      }
+    },
+    getSocialRank() {
+      return function(recipe) {
+        return recipe.social_rank ? recipe.social_rank : 0;
+      }
+    },
+    getPublisherUrl() {
+      return function(recipe) {
+        return recipe.publisher_url ? recipe.publisher_url : "error_page.html";
+      }
+    }
+  },
+  methods: {
+    handleSubmit() {
+      var obj = AJAX([this.name, this.page], "search");
+      this.recipes = obj.recipes;
+    },
+    url(id) {
+      return "detail.html?id=" + id;
+    },
+    itemUrl() {
+      return "itemList.html";
+    },
+    like(title) {
+      this.saved = JSON.parse(localStorage.getItem("favor"));
+      if (this.saved == null) {
+        this.saved = [];
+      }
+      this.saved.push(title);
+      localStorage.setItem("favor", JSON.stringify(this.saved));
+    },
+    islike(title) {
+      this.saved = JSON.parse(localStorage.getItem("favor"));
+      if (this.saved == null) {
         return false;
-      },
-      unlike(title){
-        this.saved = JSON.parse(localStorage.getItem("favor"));
-        for (var i = 0; i < this.saved.length; i++) {
-          if (this.saved[i] == title) {
-            this.saved.pop(i);
-            localStorage.setItem("favor", JSON.stringify(this.saved));
-            break;
-          }
+      }
+      for (var i = 0; i < this.saved.length; i++) {
+        if (this.saved[i] == title) {
+          return true;
         }
-        console.log(1);
-      },
-      prior() {
-        this.page--;
-        var obj = AJAX([this.name, this.page], "search");
-        this.recipes = obj.recipes;
-      },
-      next() {
-        this.page++;
-        var obj = AJAX([this.name, this.page], "search");
-        this.recipes = obj.recipes;
-      },
-      scaleData(num) {
-        return num.toFixed(2) + "%";
-      },
+      }
+      return false;
+    },
+    unlike(title) {
+      this.saved = JSON.parse(localStorage.getItem("favor"));
+      for (var i = 0; i < this.saved.length; i++) {
+        if (this.saved[i] == title) {
+          this.saved.pop(i);
+          localStorage.setItem("favor", JSON.stringify(this.saved));
+          break;
+        }
+      }
+      console.log(1);
+    },
+    prior() {
+      this.page--;
+      var obj = AJAX([this.name, this.page], "search");
+      this.recipes = obj.recipes;
+    },
+    next() {
+      this.page++;
+      var obj = AJAX([this.name, this.page], "search");
+      this.recipes = obj.recipes;
+    },
+    scaleData(num) {
+      return num.toFixed(2) + "%";
+    },
     setMatchList() {
       if (this.matchListIndex === null) {
         if (this.name === '') {
@@ -169,4 +209,4 @@ new Vue({
     self.count = obj.count;
     self.recipes = obj.recipes;
   },
-  });
+});

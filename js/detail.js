@@ -50,25 +50,25 @@ new Vue({
       return this.recipe.publisher?this.recipe.publisher:"No publisher";
     },
     getF2fUrl(){
-      return this.recipe.f2f_url?this.recipe.f2f_url:"https://www.food2fork.com/";
+      return this.recipe.f2f_url?this.recipe.f2f_url:"error_page.html";
     },
     getTitle(){
       return this.recipe.title?this.recipe.title:"No title";
     },
     getSourceUrl(){
-      return this.recipe.source_url?this.recipe.source_url:"https://www.closetcooking.com/";
+      return this.recipe.source_url?this.recipe.source_url:"error_page.html";
     },
     getRecipe_id(){
       return this.recipe.recipe_id?this.recipe.recipe_id:0;
     },
     getImageUrl(){
-      return this.recipe.iamge_url?this.iamge_url:"https://fussiesdoodles.co.uk/wp-content/uploads/2015/06/noImageAvailable.jpg";
+      return this.recipe.image_url?this.recipe.image_url:"https://fussiesdoodles.co.uk/wp-content/uploads/2015/06/noImageAvailable.jpg";
     },
     getSocialRank(){
-      return this.social_rank?this.socail_rank?0;
+      return this.recipe.social_rank?this.recipe.social_rank:0;
     },
     getPublisherUrl(){
-      return this.publisher_url?this.publisher_url?"";
+      return this.recipe.publisher_url?this.recipe.publisher_url:"error_page.html";
     }
   },
   methods:{

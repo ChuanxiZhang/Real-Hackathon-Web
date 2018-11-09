@@ -31,7 +31,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand" href="#">
-        <img src="img/logo.png" width="50" height="30" class="d-inline-block align-top" alt="">
+        <img src="img/logo.png" width="70" height="30" class="d-inline-block align-top" alt="">
         <a class="navbar-brand" href="index.html">USC1024 Recipe Search System</a>
         <a class="btn btn-primary" :href="itemUrl()" style="background-color: #de2e1c; border-color: #de2e1c;">Item List</a>
       </a>
@@ -46,29 +46,29 @@
         <div class="row no-gutters">
           <!-- should change variable in url() in {{recipt.image_url}}-->
           <div class="col-lg-6 text-white showcase-img">
-            <img v-if="recipe.image_url != null" v-bind:src="recipe.image_url" height=400px style="position: absolute; top: 120px; right: 60px;"></img>
-            <img v-else src="http://static.food2fork.com/Jalapeno2BPopper2BGrilled2BCheese2BSandwich2B12B500fd186186.jpg" height=400px style="position: absolute; top: 120px; right: 60px;"></img>
+            <img v-bind:src="getImageUrl" height=400px style="position: absolute; top: 120px; right: 60px;"></img>
+            <!-- <img v-else src="http://static.food2fork.com/Jalapeno2BPopper2BGrilled2BCheese2BSandwich2B12B500fd186186.jpg" height=400px style="position: absolute; top: 120px; right: 60px;"></img> -->
           </div>
 
           <div class="col-lg-6 my-auto showcase-text">
-            <h1>{{recipe.title}}</h1>
+            <h1>{{getTitle}}</h1>
             <div>
-              <div v-if="recipe.social_rank == 100"><five-star></five-star>
+              <div v-if="getSocialRank == 100"><five-star></five-star>
                 <span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span>
               </div>
-              <div v-else-if="recipe.social_rank >95 && recipe.social_rank < 100"><fourhalf-star></fourhalf-star>
+              <div v-else-if="getSocialRank >95 && getSocialRank < 100"><fourhalf-star></fourhalf-star>
                 <span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span>
               </div>
-              <div v-else-if="recipe.social_rank >90 && recipe.social_rank < 95"><four-star></four-star>
+              <div v-else-if="getSocialRank >90 && getSocialRank < 95"><four-star></four-star>
                 <span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span>
               </div>
-              <div v-else-if="recipe.social_rank >85 && recipe.social_rank < 90"><threehalf-star></threehalf-star>
+              <div v-else-if="getSocialRank >85 && getSocialRank < 90"><threehalf-star></threehalf-star>
                 <span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span>
               </div>
-              <div v-else-if="recipe.social_rank >80 && recipe.social_rank < 85"><three-star></three-star>
+              <div v-else-if="getSocialRank >80 && getSocialRank < 85"><three-star></three-star>
                 <span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span>
               </div>
-              <div v-else-if="recipe.social_rank >75 && recipe.social_rank < 80"><twohalf-star></twohalf-star>
+              <div v-else-if="getSocialRank >75 && getSocialRank < 80"><twohalf-star></twohalf-star>
                 <span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span>
               </div>
               <div v-else><two-star></two-star>
@@ -84,8 +84,8 @@
                 <font color="white">Buy Ingredients</font></button>
             </div>
             <br/><br/>
-            <div class="col-lg-0"><i class="fa fa-home" aria-hidden="true" style="color: #de2e1c;"></i><a :href="recipe.publisher_url" style="color: #de2e1c;">{{recipe.publisher}}</a></div><br/>
-            <div class="col-lg-0"><i class="fa fa-book" aria-hidden="true" style="color: #c2ad81;"></i>&nbsp<a :href="recipe.source_url" style="color: #c2ad81;">Cook Tutorial</a></div><br/>
+            <div class="col-lg-0"><i class="fa fa-home" aria-hidden="true" style="color: #de2e1c;"></i><a :href="getPublisherUrl" style="color: #de2e1c;">{{getPublisher}}</a></div><br/>
+            <div class="col-lg-0"><i class="fa fa-book" aria-hidden="true" style="color: #c2ad81;"></i>&nbsp<a :href="getSourceUrl" style="color: #c2ad81;">Cook Tutorial</a></div><br/>
 
             <div class="col-lg-0"><a id="ingredients" href="#" data-toggle="collapse" data-target="#detail_ingredients" style="color: #c2ad81;"><i class="fa fa-chevron-right" aria-hidden="true" style="color: #c2ad81;"></i>&nbspIngredients</a></div><br/>
             <div id = "detail_ingredients" v-for = "ingredient in recipe.ingredients" class="col-md-0 collapse in" >
