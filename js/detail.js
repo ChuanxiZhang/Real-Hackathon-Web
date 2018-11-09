@@ -45,6 +45,32 @@ new Vue({
     saved:[],
     favor:[],
   },
+  computed:{
+    getPublisher(){
+      return this.recipe.publisher?this.recipe.publisher:"No publisher";
+    },
+    getF2fUrl(){
+      return this.recipe.f2f_url?this.recipe.f2f_url:"https://www.food2fork.com/";
+    },
+    getTitle(){
+      return this.recipe.title?this.recipe.title:"No title";
+    },
+    getSourceUrl(){
+      return this.recipe.source_url?this.recipe.source_url:"https://www.closetcooking.com/";
+    },
+    getRecipe_id(){
+      return this.recipe.recipe_id?this.recipe.recipe_id:0;
+    },
+    getImageUrl(){
+      return this.recipe.iamge_url?this.iamge_url:"https://fussiesdoodles.co.uk/wp-content/uploads/2015/06/noImageAvailable.jpg";
+    },
+    getSocialRank(){
+      return this.social_rank?this.socail_rank?0;
+    },
+    getPublisherUrl(){
+      return this.publisher_url?this.publisher_url?"";
+    }
+  },
   methods:{
     save_item() {
       localStorage.setItem(this.recipe.recipe_id, JSON.stringify(this.recipe.ingredients));

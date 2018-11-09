@@ -53,6 +53,9 @@ new Vue({
       saved:[],
       like_flag:false,
     },
+    computed:{
+
+    },
     methods: {
       handleSubmit() {
         var obj = AJAX([this.name, this.page], "search");
