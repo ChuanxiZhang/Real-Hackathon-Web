@@ -87,7 +87,7 @@
       <div class="container">
         <div class="card-columns">
           <div  v-for="recipe in recipes" class="card">
-            <a :href="url(recipe.recipe_id)"><img v-bind:src="recipe.image_url" width="100%" style="border-radius: 25px;" :href="url(recipe.recipe_id)"></img></a>
+            <a :href="url(recipe.recipe_id)"><img v-bind:src="recipe.image_url" width="100%" style="border-radius: 15px;" :href="url(recipe.recipe_id)"></img></a>
             <div style="padding:0% 5% 0% 5%">
               <div style="padding-top:2%" class="card-block">
                 <h4 class="card-title"><a :href="url(recipe.recipe_id)" style="color: black;">{{recipe.title}}</a></h4>
@@ -109,23 +109,6 @@
       </div>
     </section>
 
-
-<!--     <div class="container">
-      <div class="row">
-        <div class="col-12 col-lg-4 col-lg-offset-4">
-          <div class="btn-group">
-            <a class="btn btn-primary" @click="prior" style="color: white" style="float: left;">&nbsp&nbsp&nbsp<i class="fa fa-chevron-left" aria-hidden="true"></i>Prior</a>
-          </div>
-          <div class="btn-group">
-            <strong>&nbsp&nbspPage {{this.page}}&nbsp&nbsp</strong>
-          </div>
-          <div class="btn-group">
-            <a class="btn btn-primary" @click="next" style="color: white" style="float: right">&nbsp&nbspNext&nbsp&nbsp&nbsp&nbsp<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
     <!-- Page button -->
     <section class="testimonials text-center bg-light">
 
@@ -133,15 +116,15 @@
         <div class="row">
           <div class="col-lg-4">
             <div class="btn-group">
-              <a class="btn btn-primary" @click="prior" style="color: white" style="float: left;">&nbsp&nbsp&nbsp<i class="fa fa-chevron-left" aria-hidden="true"></i>Prior</a>
+              <a class="btn btn-primary" @click="prior" style="background-color: #de2e1c; border-color: #de2e1c; color: white;" style="float: left;">&nbsp&nbsp&nbsp<i class="fa fa-chevron-left" aria-hidden="true"></i>Prior</a>
             </div>
           </div>
           <div class="col-lg-4">
-            <strong>&nbsp&nbspPage {{this.page}}&nbsp&nbsp</strong>
+            <strong>Page {{this.page}}</strong>
           </div>
           <div class="col-lg-4">
             <div class="btn-group">
-              <a class="btn btn-primary" @click="next" style="color: white" style="float: right">&nbsp&nbspNext&nbsp&nbsp&nbsp&nbsp<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+              <a class="btn btn-primary" @click="next" style="background-color: #de2e1c; border-color: #de2e1c; color: white;" style="float: right">&nbsp&nbspNext&nbsp&nbsp&nbsp&nbsp<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
@@ -166,7 +149,7 @@
             <div class="testimonial-item mx-auto mb-5 mb-lg-0">
               <img class="img-fluid rounded-circle mb-3" src="img/testimonials-2.jpg" alt="">
               <h5>Fred S.</h5>
-              <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of super nice landing pages."</p>
+              <p class="font-weight-light mb-0">"Recipe search is amazing. I've been using it to create lots of super nice food."</p>
             </div>
           </div>
           <div class="col-lg-4">

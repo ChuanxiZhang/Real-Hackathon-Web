@@ -1,3 +1,7 @@
+$('#ingredients').click(function() {
+  $(this).find('i').toggleClass('fa fa-heart').toggleClass('fa fa-heart');
+});
+
 Vue.component('five-star', {
   template: '<span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></span>'
 })

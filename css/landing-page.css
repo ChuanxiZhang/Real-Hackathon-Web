@@ -150,7 +150,7 @@ footer.footer {
 }
 
 .card{
-  border-radius: 25px;
+  border-radius: 15px;
 }
 
 .item-selected {
@@ -159,10 +159,14 @@ footer.footer {
 }
 
 .btn-like {
-  padding: 0.2rem 0.5rem;
+  padding: 0.0rem 0.25rem;
   font-size: 0.8rem;
-  line-height: 1.5;
+  line-height: 2.0;
   border-radius: 0.8rem;
+}
+
+.btn-like: active{
+  background-color: white;
 }
 
 .under{
