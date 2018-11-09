@@ -89,59 +89,65 @@
           <div  v-for="recipe in recipes" class="card">
             <a :href="url(recipe.recipe_id)"><img v-bind:src="recipe.image_url" width="100%" style="border-radius: 25px;" :href="url(recipe.recipe_id)"></img></a>
             <div style="padding:0% 5% 0% 5%">
-            <div style="padding-top:2%" class="card-block">
-              <h4 class="card-title"><a :href="url(recipe.recipe_id)" style="color: black;">{{recipe.title}}</a></h4>
-              <div >
-                <span v-if="recipe.social_rank == 100"><five-star></five-star></span>
-                <span v-else-if="recipe.social_rank >95 && recipe.social_rank < 100"><fourhalf-star></fourhalf-star></span>
-                <span v-else-if="recipe.social_rank >90 && recipe.social_rank < 95"><four-star></four-star></span>
-                <span v-else-if="recipe.social_rank >85 && recipe.social_rank < 90"><threehalf-star></threehalf-star></span>
-                <span v-else-if="recipe.social_rank >80 && recipe.social_rank < 85"><three-star></three-star></span>
-                <span v-else-if="recipe.social_rank >75 && recipe.social_rank < 80"><twohalf-star></twohalf-star></span>
-                <span v-else><two-star></two-star></div><br/>
-                <span><button class="btn btn-like btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button></span>
+              <div style="padding-top:2%" class="card-block">
+                <h4 class="card-title"><a :href="url(recipe.recipe_id)" style="color: black;">{{recipe.title}}</a></h4>
+                <div>
+                  <span v-if="recipe.social_rank == 100"><five-star></five-star><button class="btn btn-like btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button></span>
+                  <span v-else-if="recipe.social_rank >95 && recipe.social_rank < 100"><fourhalf-star></fourhalf-star><button class="btn btn-like btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button></span>
+                  <span v-else-if="recipe.social_rank >90 && recipe.social_rank < 95"><four-star></four-star><button class="btn btn-like btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button></span>
+                  <span v-else-if="recipe.social_rank >85 && recipe.social_rank < 90"><threehalf-star></threehalf-star><button class="btn btn-like btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button></span>
+                  <span v-else-if="recipe.social_rank >80 && recipe.social_rank < 85"><three-star></three-star><button class="btn btn-like btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button></span>
+                  <span v-else-if="recipe.social_rank >75 && recipe.social_rank < 80"><twohalf-star></twohalf-star><button class="btn btn-like btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button></span>
+                  <span v-else><two-star></two-star><button class="btn btn-like btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button></span>
+                </div>
               </div>
               <p  class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. --<cite title="Source Title">Mark James</cite></p>
               <p style="padding-bottom:2%" class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
-            </div>
-            <!-- <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <a :href="url(recipe.recipe_id)"><img v-bind:src="recipe.image_url" width="300px" style="border-radius: 25px;" :href="url(recipe.recipe_id)"></img></a>
-              </div>
-              <div>
-                <p class="lead mb-0" id="clampjs"><a :href="url(recipe.recipe_id)" style="color: black;">{{recipe.title}}</a></p>
-              </div>
-              <div>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span><button class="btn btn-like btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button></span>
-              </div> -->
-              <!-- <strong>Beat {{scaleData(recipe.social_rank)}}</strong><br/> -->
-              <!-- <p class="lead mb-0">recipe_id:{{recipe.recipe_id}}</p> -->
-              <!-- <p class="lead mb-0">f2f_url:{{recipe.f2f_url}}</p> -->
-              <!-- <p class="lead mb-0">source_url:{{recipe.source_url}}</p> -->
-              <!-- <p class="lead mb-0"><i class="fa fa-home" aria-hidden="true" style="color: #de2e1c;"></i><font color="#de2e1c">{{recipe.publisher}}</font></p> -->
-              <!-- <a @click="like(recipe.title)">like</a> -->
-              <!-- <button class="btn btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button> -->
-              <!-- <div class="btn-group">
-                <a class="btn btn-primary" :href="url(recipe.recipe_id)"><i class="fa fa-search-minus" aria-hidden="true"></i> Take a look</a>
-              </div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+<!--     <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-4 col-lg-offset-4">
+          <div class="btn-group">
+            <a class="btn btn-primary" @click="prior" style="color: white" style="float: left;">&nbsp&nbsp&nbsp<i class="fa fa-chevron-left" aria-hidden="true"></i>Prior</a>
+          </div>
+          <div class="btn-group">
+            <strong>&nbsp&nbspPage {{this.page}}&nbsp&nbsp</strong>
+          </div>
+          <div class="btn-group">
+            <a class="btn btn-primary" @click="next" style="color: white" style="float: right">&nbsp&nbspNext&nbsp&nbsp&nbsp&nbsp<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- Page button -->
+    <section class="testimonials text-center bg-light">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="btn-group">
+              <a class="btn btn-primary" @click="prior" style="color: white" style="float: left;">&nbsp&nbsp&nbsp<i class="fa fa-chevron-left" aria-hidden="true"></i>Prior</a>
             </div>
           </div>
+          <div class="col-lg-4">
+            <strong>&nbsp&nbspPage {{this.page}}&nbsp&nbsp</strong>
+          </div>
+          <div class="col-lg-4">
+            <div class="btn-group">
+              <a class="btn btn-primary" @click="next" style="color: white" style="float: right">&nbsp&nbspNext&nbsp&nbsp&nbsp&nbsp<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </section>
-    <div class="container">
-
-      <a class="btn btn-primary" @click="prior" style="color: white">prior</a >
-      <a class="navbar-brand"> page {{this.page}}</a >
-      <a class="btn btn-primary" @click="next" style="color: white">next</a >
-
-    </div>
-  </nav>
 
     <!-- Testimonials -->
     <section class="testimonials text-center bg-light">
