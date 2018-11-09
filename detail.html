@@ -60,9 +60,9 @@
               <div v-else-if="recipe.social_rank >75 && recipe.social_rank < 80"><twohalf-star></twohalf-star><span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span></div>
               <div v-else><two-star></two-star><span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span></div>
             </div><br/>
-            <!-- TODO: change logo based whether saved or not -->
-            <div class="btn-group">
-              <button class="btn btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-bookmark fa-sm" aria-hidden="true"></i>Favorite</button>
+            <div class="btn-group" style="padding-right:2%">
+              <button v-if="!islike(recipe.title)" class="btn btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-bookmark fa-sm" aria-hidden="true"></i>Favorite</button>
+              <button v-else class="btn btn-danger" v-on:click="unlike(recipe.title)" style="background-color: white; border-color: #de2e1c;"><font color="#de2e1c"><i class="fa fa-bookmark fa-sm" aria-hidden="true"></i>Remove</button>
             </div>
             <div class="btn-group">
               <button class="btn btn-success" v-on:click="save_item"><i class="fa fa-shopping-cart" aria-hidden="true"></i>

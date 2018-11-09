@@ -50,9 +50,35 @@ new Vue({
       localStorage.setItem(this.recipe.recipe_id, JSON.stringify(this.recipe.ingredients));
     },
     like(title){
+      this.favor = JSON.parse(localStorage.getItem("favor"));
+      if (this.favor == null){
+        this.favor = [];
+      }
       this.favor.push(title);
-      console.log(this.favor);
       localStorage.setItem("favor", JSON.stringify(this.favor));
+    },
+    islike(title){
+      this.favor = JSON.parse(localStorage.getItem("favor"));
+      if (this.favor == null){
+        return false;
+      }
+      for (var i = 0; i < this.favor.length; i++) {
+        if (this.favor[i] == title) {
+          return true;
+        }
+      }
+      return false;
+    },
+    unlike(title){
+      this.favor = JSON.parse(localStorage.getItem("favor"));
+      for (var i = 0; i < this.favor.length; i++) {
+        if (this.favor[i] == title) {
+          this.favor.pop(i);
+          localStorage.setItem("favor", JSON.stringify(this.favor));
+          break;
+        }
+      }
+      console.log(1);
     },
     itemUrl(){
       return "itemList.html";

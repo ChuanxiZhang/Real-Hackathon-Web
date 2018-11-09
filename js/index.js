@@ -51,6 +51,7 @@ new Vue({
       matchList: [],
       matchListIndex: null,
       saved:[],
+      like_flag:false,
     },
     methods: {
       handleSubmit() {
@@ -64,8 +65,35 @@ new Vue({
         return "itemList.html";
       },
       like(title){
+        this.saved = JSON.parse(localStorage.getItem("favor"));
+        if (this.saved == null){
+          this.saved = [];
+        }
         this.saved.push(title);
         localStorage.setItem("favor", JSON.stringify(this.saved));
+      },
+      islike(title){
+        this.saved = JSON.parse(localStorage.getItem("favor"));
+        if (this.saved == null){
+          return false;
+        }
+        for (var i = 0; i < this.saved.length; i++) {
+          if (this.saved[i] == title) {
+            return true;
+          }
+        }
+        return false;
+      },
+      unlike(title){
+        this.saved = JSON.parse(localStorage.getItem("favor"));
+        for (var i = 0; i < this.saved.length; i++) {
+          if (this.saved[i] == title) {
+            this.saved.pop(i);
+            localStorage.setItem("favor", JSON.stringify(this.saved));
+            break;
+          }
+        }
+        console.log(1);
       },
       prior() {
         this.page--;
