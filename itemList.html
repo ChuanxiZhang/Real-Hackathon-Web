@@ -52,26 +52,19 @@
   <body>
   <div id="fb-root"></div>
 
-  <div id ="detail_vue">
+  <div id ="item_vue">
     <!-- Navigation -->
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand" href="#">
         <img src="img/logo.png" width="70" height="30" class="d-inline-block align-top" alt="">
         <a class="navbar-brand" href="index.html">USC1024 Recipe Search System</a>
-        <a class="btn btn-primary" :href="itemUrl()" style="background-color: #de2e1c; border-color: #de2e1c; color: white;">Item List</a>
       </a>
     </nav>
 
     <!-- <p>{{recipe.publisher}}</p>
     <p>{{recipe.recipe_id}}</p> -->
-    <div id ="item_vue">
-      <a @click="getList()">Item list</a>
-      <p v-for="item in list">{{item}}</p>
-      <a @click="getFavor()">Recipe list</a>
-      <p v-for="item in favorList">{{item}}</p>
-      <a @click="getHistory()">History list</a>
-      <p v-for="item in historyList">{{item}}</p>
-    </div>
+
+
     <!-- Image Showcases -->
     <section class="showcase">
       <div class="container-fluid p-0">
