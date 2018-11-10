@@ -24,3 +24,7 @@ new Vue({
 
   }
 });
+
+$('#collapseOne').click(function() {
+  $(this).find('i').toggleClass('fa fa-chevron-right').toggleClass('fa fa-chevron-down');
+});

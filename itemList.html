@@ -58,7 +58,7 @@
       <a class="navbar-brand" href="#">
         <img src="img/logo.png" width="70" height="30" class="d-inline-block align-top" alt="">
         <a class="navbar-brand" href="index.html">USC1024 Recipe Search System</a>
-        <a class="btn btn-primary" :href="itemUrl()" style="background-color: #de2e1c; border-color: #de2e1c;">Item List</a>
+        <a class="btn btn-primary" :href="itemUrl()" style="background-color: #de2e1c; border-color: #de2e1c; color: white;">Item List</a>
       </a>
     </nav>
 
@@ -78,47 +78,59 @@
         <div class="row no-gutters">
           <!-- should change variable in url() in {{recipt.image_url}}-->
           <div class="col-lg-6 text-white showcase-img">
-            <img v-bind:src="img/bg-profile.jpg" height=400px style="position: absolute; top: 120px; right: 60px;"></img>
+            <img src="img/bg-profile.jpg" height=360px style="position: absolute; top: 120px; right: 60px;"></img>
             <!-- <img v-else src="http://static.food2fork.com/Jalapeno2BPopper2BGrilled2BCheese2BSandwich2B12B500fd186186.jpg" height=400px style="position: absolute; top: 120px; right: 60px;"></img> -->
           </div>
 
           <div class="col-lg-6 my-auto showcase-text">
             <h1>Jenny White</h1>
-            <div>
-              <div><five-star></five-star>
-                <span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span>
+            <div><span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span></div><br/>
+
+          <div id="accordion">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="color: #c2ad81;" id="collapseOne">
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp<strong>Item List</strong>
+                  </button>
+                </h5>
               </div>
-            </div><br/>
-            <div class="btn-group" style="padding-right:2%">
-              <button class="btn btn-danger" style="background-color: #de2e1c; border-color: #de2e1c; border-radius: 0.25rem;"><i class="fa fa-bookmark" aria-hidden="true"></i>Favorite</button>
-            </div>
-            <div class="btn-group">
-              <button class="btn btn-success" v-on:click="save_item"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                <font color="white">Buy Ingredients</font></button>
-            </div>
-            <br/><br/>
-<!--             <div class="col-lg-0"><i class="fa fa-home" aria-hidden="true" style="color: #de2e1c;"></i><a :href="getPublisherUrl" style="color: #de2e1c;">{{getPublisher}}</a></div><br/>
-            <div class="col-lg-0"><i class="fa fa-book" aria-hidden="true" style="color: #c2ad81;"></i>&nbsp<a :href="getSourceUrl" style="color: #c2ad81;">Cook Tutorial</a></div><br/>
- -->
-            <div class="col-lg-0"><a id="ingredients" href="#" data-toggle="collapse" data-target="#detail_ingredients" style="color: #c2ad81;"><i class="fa fa-chevron-right" aria-hidden="true" style="color: #c2ad81;"></i>&nbspIngredients</a></div><br/>
-<!--             <div id = "detail_ingredients" v-for = "ingredient in recipe.ingredients" class="col-md-0 collapse in" >
-                <a style="color: black;">&nbsp&nbsp&nbsp&nbsp<i class="fa fa-check" aria-hidden="true"></i>
-&nbsp&nbsp{{ingredient}}</a>
-            </div><br/> -->
-            <div class="form-group">
-              <textarea type="text" class="form-control" id="usercomment" aria-describedby="Help" placeholder="Enter your comment" rows="2"></textarea>
-              <small id="Help" class="form-text text-muted">We'll never share your personal information with anyone else.</small>
-            </div>
-            <div class="span1 text-left">
-              <div class="btn-group" style="padding-right:2%">
-                <button class="btn btn-primary" href="index.html" style="background-color: #3B5998; border-color: white;">
-                  <i class="fa fa-paper-plane" aria-hidden="true"></i><font color="white">Submit</font></button>
-              </div>
-              <div class="btn-group">
-                <button class="btn btn-warning" href="index.html">
-                  <font color="white"><i class="fa fa-share fa-sm" aria-hidden="true"></i>Go Back</font></button>
+
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
               </div>
             </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Collapsible Group Item #2
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Collapsible Group Item #3
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+          </div>
 
           </div>
         </div>
@@ -172,7 +184,6 @@
       </div>
     </footer>
   </div>
-    <script src="js/itemList.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="js/ajax.js"></script>
