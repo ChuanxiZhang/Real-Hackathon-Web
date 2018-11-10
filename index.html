@@ -86,12 +86,13 @@
       <div class="container">
         <div class="card-columns">
           <div  v-for="recipe in recipes" class="card">
-            <a :href="url(recipe.recipe_id)"><img v-bind:src="getImageUrl(recipe)" width="100%" style="border-radius: 15px;" :href="url(recipe.recipe_id)"></img></a>
+            <span v-on:click="click_url(recipe.title)"><a :href="url(recipe.recipe_id)" ><img v-bind:src="getImageUrl(recipe)" width="100%" style="border-radius: 15px;"></img></a>
             <div style="padding:0% 5% 0% 5%">
               <div style="padding-top:2%" class="card-block">
-                <h4 class="card-title"><a :href="url(recipe.recipe_id)" style="color: black;">{{getTitle(recipe)}}</a></h4>
+                <h4 class="card-title"><span v-on:click="url(recipe.recipe_id)"><a :href="url(recipe.recipe_id)" style="color: black;">{{getTitle(recipe)}}</a></span></h4>
                 <div>
                   <span v-if="getSocialRank(recipe) == 100"><five-star></five-star>
+
                     <button v-if="!islike(recipe.title)" class="btn btn-like btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button>
                     <button v-else class="btn btn-like btn-danger" v-on:click="unlike(recipe.title)" style="background-color: white; border-color: #de2e1c;"><font color="#de2e1c"><i class="fa fa-heart" aria-hidden="true" color="#de2e1c"></i>Unlike</font>
                     </button>
