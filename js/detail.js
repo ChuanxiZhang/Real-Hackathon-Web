@@ -11,6 +11,24 @@ function GetRequest() {
   return theRequest;
 }
 
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+            + " " + date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
+    return currentdate;
+}
+
 Vue.component('five-star', {
   template: '<span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></span>'
 })
@@ -44,6 +62,7 @@ new Vue({
     recipe: {},
     saved:[],
     favor:[],
+    history:[],
   },
   computed:{
     getPublisher(){
@@ -73,20 +92,28 @@ new Vue({
   },
   methods:{
     save_item() {
+      if (localStorage.getItem('history') != null){
+        this.history = JSON.parse(localStorage.getItem("history"));
+      }
+      this.history.push(getNowFormatDate()+" [detail page]save ingredients of " + "\"" + this.recipe.title + "\"");
+      localStorage.setItem("history", JSON.stringify(this.history));
       localStorage.setItem(this.recipe.recipe_id, JSON.stringify(this.recipe.ingredients));
     },
     like(title){
-      this.favor = JSON.parse(localStorage.getItem("favor"));
-      if (this.favor == null){
-        this.favor = [];
+      if (localStorage.getItem('history') != null){
+        this.history = JSON.parse(localStorage.getItem("history"));
+      }
+      this.history.push(getNowFormatDate()+" [detail page]like the recipe" + "\"" + title + "\"");
+      localStorage.setItem("history", JSON.stringify(this.history));
+      if (localStorage.getItem('favor') != null){
+        this.favor = JSON.parse(localStorage.getItem("favor"));
       }
       this.favor.push(title);
       localStorage.setItem("favor", JSON.stringify(this.favor));
     },
     islike(title){
-      this.favor = JSON.parse(localStorage.getItem("favor"));
-      if (this.favor == null){
-        return false;
+      if (localStorage.getItem('favor') != null){
+        this.favor = JSON.parse(localStorage.getItem("favor"));
       }
       for (var i = 0; i < this.favor.length; i++) {
         if (this.favor[i] == title) {
@@ -96,7 +123,9 @@ new Vue({
       return false;
     },
     unlike(title){
-      this.favor = JSON.parse(localStorage.getItem("favor"));
+      if (localStorage.getItem('favor') != null){
+        this.favor = JSON.parse(localStorage.getItem("favor"));
+      }
       for (var i = 0; i < this.favor.length; i++) {
         if (this.favor[i] == title) {
           this.favor.pop(i);
@@ -104,7 +133,11 @@ new Vue({
           break;
         }
       }
-      console.log(1);
+      if (localStorage.getItem('history') != null){
+        this.history = JSON.parse(localStorage.getItem("history"));
+      }
+      this.history.push(getNowFormatDate()+" [detail page]cancel like the recipe" + "\"" + title + "\"");
+      localStorage.setItem("history", JSON.stringify(this.history));
     },
     itemUrl(){
       return "itemList.html";

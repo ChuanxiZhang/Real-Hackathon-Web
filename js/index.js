@@ -2,6 +2,24 @@ $('#ingredients').click(function() {
   $(this).find('i').toggleClass('fa fa-heart').toggleClass('fa fa-heart');
 });
 
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+            + " " + date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
+    return currentdate;
+}
+
 Vue.component('five-star', {
   template: '<span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></span>'
 })
@@ -53,6 +71,7 @@ new Vue({
     matchListIndex: null,
     saved: [],
     like_flag: false,
+    history:[],
   },
   computed: {
     getPublisher() {
@@ -98,27 +117,42 @@ new Vue({
   },
   methods: {
     handleSubmit() {
+      if (localStorage.getItem('history') != null){
+        this.history = JSON.parse(localStorage.getItem("history"));
+      }
+      this.history.push(getNowFormatDate()+" [home page]searched " + "\"" +this.name + "\"");
+      localStorage.setItem("history", JSON.stringify(this.history));
       var obj = AJAX([this.name, this.page], "search");
       this.recipes = obj.recipes;
     },
     url(id) {
       return "detail.html?id=" + id;
     },
+    click_url(title){
+      if (localStorage.getItem('history') != null){
+        this.history = JSON.parse(localStorage.getItem("history"));
+      }
+      this.history.push(getNowFormatDate()+" [home page]scan detials of recipe" + "\"" + title + "\"");
+      localStorage.setItem("history", JSON.stringify(this.history));
+    },
     itemUrl() {
       return "itemList.html";
     },
     like(title) {
-      this.saved = JSON.parse(localStorage.getItem("favor"));
-      if (this.saved == null) {
-        this.saved = [];
+      if (localStorage.getItem('favor') != null){
+        this.saved = JSON.parse(localStorage.getItem("favor"));
       }
       this.saved.push(title);
       localStorage.setItem("favor", JSON.stringify(this.saved));
+      if (localStorage.getItem('history') != null){
+        this.history = JSON.parse(localStorage.getItem("history"));
+      }
+      this.history.push(getNowFormatDate()+" [home page]like the recipe" + "\"" + title + "\"");
+      localStorage.setItem("history", JSON.stringify(this.history));
     },
     islike(title) {
-      this.saved = JSON.parse(localStorage.getItem("favor"));
-      if (this.saved == null) {
-        return false;
+      if (localStorage.getItem('favor') != null){
+        this.saved = JSON.parse(localStorage.getItem("favor"));
       }
       for (var i = 0; i < this.saved.length; i++) {
         if (this.saved[i] == title) {
@@ -128,7 +162,9 @@ new Vue({
       return false;
     },
     unlike(title) {
-      this.saved = JSON.parse(localStorage.getItem("favor"));
+      if (localStorage.getItem('favor') != null){
+        this.saved = JSON.parse(localStorage.getItem("favor"));
+      }
       for (var i = 0; i < this.saved.length; i++) {
         if (this.saved[i] == title) {
           this.saved.pop(i);
@@ -136,15 +172,29 @@ new Vue({
           break;
         }
       }
-      console.log(1);
+      if (localStorage.getItem('history') != null){
+        this.history = JSON.parse(localStorage.getItem("history"));
+      }
+      this.history.push(getNowFormatDate()+" [home page]cancel like the recipe" + "\"" + title + "\"");
+      localStorage.setItem("history", JSON.stringify(this.history));
     },
     prior() {
       this.page--;
+      if (localStorage.getItem('history') != null){
+        this.history = JSON.parse(localStorage.getItem("history"));
+      }
+      this.history.push(getNowFormatDate()+" [home page]click \"prior page\" and transfer to " + "\"" + this.page + "\"");
+      localStorage.setItem("history", JSON.stringify(this.history));
       var obj = AJAX([this.name, this.page], "search");
       this.recipes = obj.recipes;
     },
     next() {
       this.page++;
+      if (localStorage.getItem('history') != null){
+        this.history = JSON.parse(localStorage.getItem("history"));
+      }
+      this.history.push(getNowFormatDate()+" [home page]click \"next page\" and transfer to " + "\"" + this.page + "\"");
+      localStorage.setItem("history", JSON.stringify(this.history));
       var obj = AJAX([this.name, this.page], "search");
       this.recipes = obj.recipes;
     },
