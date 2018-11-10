@@ -149,6 +149,11 @@ footer.footer {
   -webkit-box-orient: vertical;
 }
 
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
 .card{
   border-radius: 15px;
 }
