@@ -63,6 +63,7 @@ new Vue({
     saved:[],
     favor:[],
     history:[],
+    showloading: true,
   },
   computed:{
     getPublisher(){
