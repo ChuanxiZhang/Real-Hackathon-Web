@@ -91,7 +91,10 @@
 
               <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                 <div class="card-body">
-                    <li v-for="item in list">{{item}}</li>
+                  <div><span align=width=50%>Ingredients name</span> <span width=50%>Quantity</span></div>
+                  <div v-for="ingredient in ingredientList">
+                    <span align=width=50%>{{ingredient.name}}</span> <span width=50%>{{ingredient.num}}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -105,7 +108,10 @@
               </div>
               <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                 <div class="card-body">
-                    <li v-for="item in favorList">{{item}}</li>
+                  <div><span align=width=50%>Recipe name</span> <span width=50%>Quantity</span></div>
+                  <div v-for="favor in favorList">
+                    <span align=width=50%>{{favor.name}}</span> <span width=50%>{{favor.num}}</span>
+                  </div>
                 </div>
               </div>
             </div>

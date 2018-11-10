@@ -88,6 +88,12 @@
               <button class="btn btn-success" v-on:click="save_item"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 <font color="white">Buy Ingredients</font></button>
             </div>
+            <div  style="padding-right:5%; padding-top:2%">
+                <button class="btn btn-danger" v-on:click="serving += 1"><i class="fa fa-plus" aria-hidden="true"></i></i></button>
+                <span style="padding-right:5%; padding-left:5%">{{serving}}</span>
+                <button v-if="serving > 1" class="btn btn-danger" v-on:click="serving -= 1"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                <button v-else disabled class="btn btn-danger"><i class="fa fa-minus" aria-hidden="true"></i></button>
+            </div>
             <br/><br/>
             <div class="col-lg-0"><i class="fa fa-home" aria-hidden="true" style="color: #de2e1c;"></i><a :href="getPublisherUrl" style="color: #de2e1c;">{{getPublisher}}</a></div><br/>
             <div class="col-lg-0"><i class="fa fa-book" aria-hidden="true" style="color: #c2ad81;"></i>&nbsp<a :href="getSourceUrl" style="color: #c2ad81;">Cook Tutorial</a></div><br/>

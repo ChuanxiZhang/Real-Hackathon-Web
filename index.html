@@ -96,10 +96,14 @@
                 <h4 class="card-title"><span v-on:click="url(recipe.recipe_id)"><a :href="url(recipe.recipe_id)" style="color: black;">{{getTitle(recipe)}}</a></span></h4>
                 <div>
                   <span v-if="getSocialRank(recipe) == 100"><five-star></five-star>
-
                     <button v-if="!islike(recipe.title)" class="btn btn-like btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button>
-                    <button v-else class="btn btn-like btn-danger" v-on:click="unlike(recipe.title)" style="background-color: white; border-color: #de2e1c;"><font color="#de2e1c"><i class="fa fa-heart" aria-hidden="true" color="#de2e1c"></i>Unlike</font>
-                    </button>
+                    <button v-else class="btn btn-like btn-danger" v-on:click="unlike(recipe.title)" style="background-color: white; border-color: #de2e1c;"><font color="#de2e1c"><i class="fa fa-heart" aria-hidden="true" color="#de2e1c"></i>Unlike</font></button>
+                    <div>
+                        <button class="btn btn-like btn-danger" v-on:click="serving += 1"><i class="fa fa-plus" aria-hidden="true"></i></i></button>
+                        <span style="padding-right:5%; padding-left:5%">{{serving}}</span>
+                        <button v-if="serving > 1" class="btn btn-like btn-danger" v-on:click="serving -= 1"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                        <button v-else disabled class="btn btn-like btn-danger"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                    </div>
                   </span>
                   <span v-else-if="getSocialRank(recipe) >95 && getSocialRank(recipe) < 100"><fourhalf-star></fourhalf-star>
                     <button v-if="!islike(recipe.title)" class="btn btn-like btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button>
@@ -129,6 +133,7 @@
                   <span v-else><two-star></two-star>
                     <button v-if="!islike(recipe.title)" class="btn btn-like btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c;"><i class="fa fa-heart" aria-hidden="true"></i>Like</button>
                     <button v-else class="btn btn-like btn-danger" v-on:click="unlike(recipe.title)" style="background-color: white; border-color: #de2e1c;"><font color="#de2e1c"><i class="fa fa-heart" aria-hidden="true" color="#de2e1c"></i>Unlike</font>
+
                     </button>
                   </span>
                 </div>

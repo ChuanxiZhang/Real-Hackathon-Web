@@ -73,6 +73,7 @@ new Vue({
     like_flag: false,
     history:[],
     showloading:true,
+    serving:1,
   },
   computed: {
     getPublisher() {
@@ -151,23 +152,39 @@ new Vue({
       return "itemList.html";
     },
     like(title) {
-      if (localStorage.getItem('favor') != null){
-        this.saved = JSON.parse(localStorage.getItem("favor"));
-      }
-      this.saved.push(title);
-      localStorage.setItem("favor", JSON.stringify(this.saved));
       if (localStorage.getItem('history') != null){
         this.history = JSON.parse(localStorage.getItem("history"));
       }
       this.history.push(getNowFormatDate()+" [home page]like the recipe" + "\"" + title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
+      if (localStorage.getItem('favor') != null){
+        this.saved = JSON.parse(localStorage.getItem("favor"));
+        var found = false;
+        for(var i = 0; i< this.saved.length;i++){
+          var item = this.saved[i].split("|");
+          console.log(item[0]);
+          if (item[0] == title){
+            item[1] = this.serving;
+            this.saved[i] = item.join("|");
+            found = true;
+          }
+        }
+        if(!found){
+          this.saved.push(title+"|"+this.serving);
+        }
+      } else{
+        this.saved.push(title+"|"+this.serving);
+      }
+      console.log(this.saved);
+
+      localStorage.setItem("favor", JSON.stringify(this.saved));
     },
     islike(title) {
       if (localStorage.getItem('favor') != null){
         this.saved = JSON.parse(localStorage.getItem("favor"));
       }
       for (var i = 0; i < this.saved.length; i++) {
-        if (this.saved[i] == title) {
+        if (this.saved[i].split("|")[0] == title) {
           return true;
         }
       }
@@ -178,7 +195,7 @@ new Vue({
         this.saved = JSON.parse(localStorage.getItem("favor"));
       }
       for (var i = 0; i < this.saved.length; i++) {
-        if (this.saved[i] == title) {
+        if (this.saved[i].split("|")[0] == title) {
           this.saved.pop(i);
           localStorage.setItem("favor", JSON.stringify(this.saved));
           break;

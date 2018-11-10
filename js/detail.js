@@ -29,6 +29,14 @@ function getNowFormatDate() {
     return currentdate;
 }
 
+function copy (array) {
+   let newArray = []
+   for(let item of array) {
+      newArray.push(item);
+   }
+   return  newArray;
+}
+
 Vue.component('five-star', {
   template: '<span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></span>'
 })
@@ -64,6 +72,7 @@ new Vue({
     favor:[],
     history:[],
     showloading: true,
+    serving:1,
   },
   computed:{
     getPublisher(){
@@ -98,7 +107,9 @@ new Vue({
       }
       this.history.push(getNowFormatDate()+" [detail page]save ingredients of " + "\"" + this.recipe.title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
-      localStorage.setItem(this.recipe.recipe_id, JSON.stringify(this.recipe.ingredients));
+      var ingredients = copy(this.recipe.ingredients);
+      ingredients.push(this.serving);
+      localStorage.setItem(this.recipe.recipe_id, JSON.stringify(ingredients));
     },
     like(title){
       if (localStorage.getItem('history') != null){
@@ -108,8 +119,24 @@ new Vue({
       localStorage.setItem("history", JSON.stringify(this.history));
       if (localStorage.getItem('favor') != null){
         this.favor = JSON.parse(localStorage.getItem("favor"));
+        var found = false;
+        for(var i = 0; i< this.favor.length;i++){
+          var item = this.favor[i].split("|");
+          console.log(item[0]);
+          if (item[0] == title){
+            item[1] = this.serving;
+            this.favor[i] = item.join("|");
+            found = true;
+          }
+        }
+        if(!found){
+          this.favor.push(title+"|"+this.serving);
+        }
+      } else{
+        this.favor.push(title+"|"+this.serving);
       }
-      this.favor.push(title);
+      console.log(this.favor);
+
       localStorage.setItem("favor", JSON.stringify(this.favor));
     },
     islike(title){
@@ -117,7 +144,7 @@ new Vue({
         this.favor = JSON.parse(localStorage.getItem("favor"));
       }
       for (var i = 0; i < this.favor.length; i++) {
-        if (this.favor[i] == title) {
+        if (this.favor[i].split("|")[0] == title) {
           return true;
         }
       }
@@ -128,7 +155,7 @@ new Vue({
         this.favor = JSON.parse(localStorage.getItem("favor"));
       }
       for (var i = 0; i < this.favor.length; i++) {
-        if (this.favor[i] == title) {
+        if (this.favor[i].split("|")[0] == title) {
           this.favor.pop(i);
           localStorage.setItem("favor", JSON.stringify(this.favor));
           break;
