@@ -175,8 +175,11 @@ footer.footer {
 }
 
 .under{
-  position: absolute;
+  position: relative;
 }
 .upper{
-  position: relative;
+  position: absolute;
+  width:100%;
+  top: 25%;
+  right: 15px;
 }
