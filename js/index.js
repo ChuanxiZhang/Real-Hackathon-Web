@@ -72,6 +72,7 @@ new Vue({
     saved: [],
     like_flag: false,
     history:[],
+    showloading:true,
   },
   computed: {
     getPublisher() {
@@ -116,6 +117,17 @@ new Vue({
     }
   },
   methods: {
+    getData(page){
+      this.showloading = true;
+      var obj = AJAX([this.name, page], "search");
+      this.count = obj.count;
+
+      for (var i = 0; i < obj.recipes.length; i++) {
+        this.recipes.push(obj.recipes[i]);
+      }
+      console.log(this.recipes.length);
+      this.showloading = false;
+    },
     handleSubmit() {
       if (localStorage.getItem('history') != null){
         this.history = JSON.parse(localStorage.getItem("history"));
@@ -253,10 +265,19 @@ new Vue({
       }
     },
   },
+  mounted() {
+    this.getData(this.page)
+    window.addEventListener('scroll', () => {
+      var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+      if (scrollTop + window.innerHeight + 3000>= document.body.offsetHeight) {
+        if (!this.showloading) {
+          this.getData(this.page += 1)
+        }
+      }
+    })
+
+  },
   created() {
     var self = this;
-    var obj = AJAX(["chicken", "1"], "search");
-    self.count = obj.count;
-    self.recipes = obj.recipes;
   },
 });
