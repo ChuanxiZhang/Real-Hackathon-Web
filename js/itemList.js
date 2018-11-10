@@ -25,6 +25,6 @@ new Vue({
   }
 });
 
-$('#collapseOne').click(function() {
+$('#collapseOne_arrow').click(function() {
   $(this).find('i').toggleClass('fa fa-chevron-right').toggleClass('fa fa-chevron-down');
 });
