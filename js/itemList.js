@@ -28,3 +28,11 @@ new Vue({
 $('#collapseOne_arrow').click(function() {
   $(this).find('i').toggleClass('fa fa-chevron-down').toggleClass('fa fa-chevron-right');
 });
+
+$('#collapseTwo_arrow').click(function() {
+  $(this).find('i').toggleClass('fa fa-chevron-down').toggleClass('fa fa-chevron-right');
+});
+
+$('#collapseThree_arrow').click(function() {
+  $(this).find('i').toggleClass('fa fa-chevron-down').toggleClass('fa fa-chevron-right');
+});
