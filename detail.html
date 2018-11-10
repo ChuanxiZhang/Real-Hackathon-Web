@@ -8,7 +8,11 @@
     <meta name="referrer" content ="never">
     <title>Recipe Details</title>
     <link rel="shortcut icon" href="img/small_logo.png" type="image/x-icon">
-
+    <style media="screen">
+      [v-cloak] {
+        display: none;
+      }
+    </style>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -43,7 +47,7 @@
 
     <!-- Image Showcases -->
     <section class="showcase">
-      <div class="container-fluid p-0">
+      <div v-cloak class="container-fluid p-0">
         <div class="row no-gutters">
           <!-- should change variable in url() in {{recipt.image_url}}-->
           <div class="col-lg-6 text-white showcase-img">

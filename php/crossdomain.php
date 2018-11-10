@@ -4,7 +4,7 @@
   $site = 'https://www.food2fork.com/api/';
 
   function url_strs(){
-    $key = '7f8896d711c7fd6baa3ef20957e8f442';
+    $key = '7634b54f5c093ea22c6edafe02f275bd';
     if (isset($_GET['search'])) {
       $query = $_GET['search'];
       return "search?key=".$key."&q=".$query[0]."&page=".$query[1];

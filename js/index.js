@@ -52,7 +52,7 @@ new Vue({
   data: {
     count: 0,
     recipes: [],
-    name: "chicken",
+    name: "",
     page: 1,
     nameList: ["apple", "pear", "chicken", "artichoke", "asparagus", "beetroot", "pepper", "broccoli", "brussels", "sprouts",
       "cabbage", "carrot", "cauliflower", "celery", "cucumber", "eggplant", "garlic", "lettuce", "mushroom", "onion", "peas", "potato",
