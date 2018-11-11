@@ -25,6 +25,25 @@ Vue.component('twohalf-star', {
 Vue.component('two-star', {
   template: '<span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></span>'
 })
+
+function getNowFormatDate() {
+  var date = new Date();
+  var seperator1 = "-";
+  var seperator2 = ":";
+  var month = date.getMonth() + 1;
+  var strDate = date.getDate();
+  if (month >= 1 && month <= 9) {
+    month = "0" + month;
+  }
+  if (strDate >= 0 && strDate <= 9) {
+    strDate = "0" + strDate;
+  }
+  var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate +
+    " " + date.getHours() + seperator2 + date.getMinutes() +
+    seperator2 + date.getSeconds();
+  return currentdate;
+}
+
 new Vue({
   el: '#index_vue',
   data: {
@@ -111,7 +130,7 @@ new Vue({
       if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate() + " [home page]searched " + "\"" + this.name + "\"");
+      this.history.push(getNowFormatDate() + ",home,none,searched " + "\"" + this.name + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
       var obj = AJAX([this.name, this.page], "search");
       this.recipes = obj.recipes;
@@ -123,7 +142,7 @@ new Vue({
       if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate() + " [home page]scan detials of recipe" + "\"" + title + "\"");
+      this.history.push(getNowFormatDate() + ",home,none,scan detials of recipe" + "\"" + title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
     },
     itemUrl() {
@@ -133,7 +152,7 @@ new Vue({
       if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate() + " [home page]like the recipe" + "\"" + title + "\"");
+      this.history.push(getNowFormatDate() + " ,home,like, the recipe" + "\"" + title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
       if (localStorage.getItem('favor') != null) {
         this.saved = JSON.parse(localStorage.getItem("favor"));
@@ -182,7 +201,7 @@ new Vue({
       if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate() + " [home page]cancel like the recipe" + "\"" + title + "\"");
+      this.history.push(getNowFormatDate() + ",home,cancel,the recipe" + "\"" + title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
     },
     prior() {
@@ -190,7 +209,7 @@ new Vue({
       if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate() + " [home page]click \"prior page\" and transfer to " + "\"" + this.page + "\"");
+      this.history.push(getNowFormatDate() + ",home,none,click \"prior page\" and transfer to " + "\"" + this.page + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
       var obj = AJAX([this.name, this.page], "search");
       this.recipes = obj.recipes;
@@ -200,30 +219,13 @@ new Vue({
       if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate() + " [home page]click \"next page\" and transfer to " + "\"" + this.page + "\"");
+      this.history.push(getNowFormatDate() + ",home,none,click \"next page\" and transfer to " + "\"" + this.page + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
       var obj = AJAX([this.name, this.page], "search");
       this.recipes = obj.recipes;
     },
     scaleData(num) {
       return num.toFixed(2) + "%";
-    },
-    getNowFormatDate() {
-      var date = new Date();
-      var seperator1 = "-";
-      var seperator2 = ":";
-      var month = date.getMonth() + 1;
-      var strDate = date.getDate();
-      if (month >= 1 && month <= 9) {
-        month = "0" + month;
-      }
-      if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-      }
-      var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate +
-        " " + date.getHours() + seperator2 + date.getMinutes() +
-        seperator2 + date.getSeconds();
-      return currentdate;
     },
     setMatchList() {
       if (this.matchListIndex === null) {

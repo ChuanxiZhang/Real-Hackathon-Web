@@ -39,6 +39,33 @@ Vue.component('two-star', {
   template: '<span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></span>'
 })
 
+
+function copy(array) {
+  let newArray = []
+  for (let item of array) {
+    newArray.push(item);
+  }
+  return newArray;
+}
+
+function getNowFormatDate() {
+  var date = new Date();
+  var seperator1 = "-";
+  var seperator2 = ":";
+  var month = date.getMonth() + 1;
+  var strDate = date.getDate();
+  if (month >= 1 && month <= 9) {
+    month = "0" + month;
+  }
+  if (strDate >= 0 && strDate <= 9) {
+    strDate = "0" + strDate;
+  }
+  var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate +
+    " " + date.getHours() + seperator2 + date.getMinutes() +
+    seperator2 + date.getSeconds();
+  return currentdate;
+}
+
 new Vue({
   el: '#detail_vue',
   data: {
@@ -80,7 +107,7 @@ new Vue({
       if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate() + " [detail page]save ingredients of " + "\"" + this.recipe.title + "\"");
+      this.history.push(getNowFormatDate() + ",detail,save,ingredients of " + "\"" + this.recipe.title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
       var ingredients = copy(this.recipe.ingredients);
       ingredients.push(this.serving);
@@ -90,7 +117,7 @@ new Vue({
       if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate() + " [detail page]like the recipe" + "\"" + title + "\"");
+      this.history.push(getNowFormatDate() + ",detail,like, the recipe" + "\"" + title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
       if (localStorage.getItem('favor') != null) {
         this.favor = JSON.parse(localStorage.getItem("favor"));
@@ -139,35 +166,11 @@ new Vue({
       if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate() + " [detail page]cancel like the recipe" + "\"" + title + "\"");
+      this.history.push(getNowFormatDate() + ",detail,cancel, the recipe" + "\"" + title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
     },
     itemUrl() {
       return "itemList.html";
-    },
-    getNowFormatDate() {
-      var date = new Date();
-      var seperator1 = "-";
-      var seperator2 = ":";
-      var month = date.getMonth() + 1;
-      var strDate = date.getDate();
-      if (month >= 1 && month <= 9) {
-        month = "0" + month;
-      }
-      if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-      }
-      var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate +
-        " " + date.getHours() + seperator2 + date.getMinutes() +
-        seperator2 + date.getSeconds();
-      return currentdate;
-    },
-    copy(array) {
-      let newArray = []
-      for (let item of array) {
-        newArray.push(item);
-      }
-      return newArray;
     },
   },
   created() {

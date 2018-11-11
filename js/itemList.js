@@ -49,7 +49,19 @@ new Vue({
       }
     },
     getHistory() {
-      this.historyList = JSON.parse(localStorage.getItem("history"));
+      this.historyList = [];
+      this.iList = JSON.parse(localStorage.getItem("history"));
+      for(var i = 0; i < this.iList.length; i++) {
+        console.log(this.iList[i]);
+        var item = this.iList[i].split(",");
+        var result = {
+          "time": item[0],
+          "page": item[1],
+          "type":item[2],
+          "content":item[3],
+        };
+        this.historyList.push(result);
+      }
     }
   },
   created() {
