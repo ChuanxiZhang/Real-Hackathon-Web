@@ -19,7 +19,7 @@
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
   <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
   <div id="fb-root"></div>
@@ -27,7 +27,7 @@
   <div id="item_vue">
     <!-- Navigation -->
     <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="index.html">
         <img src="img/logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
         <a class="navbar-brand" href="index.html"><img height="40" src="img/title.png" class="d-inline-block align-top" alt=""></a>
         <a class="btn btn-primary" href="#" style="background-color: #de2e1c; border-color: #de2e1c;">Contact Us</a>
@@ -60,7 +60,7 @@
                     <div><span align=width=50% style="color: #c2ad81;">Ingredients name x Quantity</span></div>
                     <div v-for="ingredient in ingredientList">
                       <span align=width=50%><i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                        {{ingredient.name}}</span><span></span><span> x </span><span width=50%>{{ingredient.num}}</span>
+                        {{ingredient.name}}</span><span></span><span> x </span><span width=50%> {{ingredient.num}}</span>
                     </div>
                   </div>
                 </div>
@@ -79,7 +79,7 @@
                   <div class="card-body">
                     <div><span align=width=50% style="color: #de2e1c;">Recipe name</span></div>
                     <div v-for="favor in favorList">
-                      <span align=width=50%><i class="fa fa-coffee" aria-hidden="true"></i>{{favor.name}}</span>
+                      <span align=width=50%><i class="fa fa-coffee" aria-hidden="true"></i> {{favor.name}}</span>
                     </div>
                   </div>
                 </div>
@@ -100,9 +100,9 @@
                         <span v-else-if="item.type == 'cancel'"><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
                         <span v-else-if="item.type == 'save'"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
                         <span v-else><i class="fa fa-search" aria-hidden="true"></i></span>
-                        <span style="color:#007bff;">{{item.time}}: </span>
-                        <span v-if="item.type != 'none'">{{item.type}} {{item.content}}</span>
-                        <span v-else="item.type != 'none'">{{item.content}}</span>
+                        <span style="color:#007bff;"> {{item.time}}: </span>
+                        <span v-if="item.type != 'none'"> {{item.type}} {{item.content}}</span>
+                        <span v-else="item.type != 'none'"> {{item.content}}</span>
                       </li>
                     </div>
                   </div>

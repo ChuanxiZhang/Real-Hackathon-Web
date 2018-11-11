@@ -23,6 +23,7 @@
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
   <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 
 <body>
@@ -79,14 +80,14 @@
               </div>
             </div><br />
             <div class="btn-group" style="padding-right:2%">
-              <button v-if="!islike(recipe.title)" class="btn btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c; border-radius: 0.25rem;"><i class="fa fa-bookmark" aria-hidden="true"></i>Favorite</button>
+              <button v-if="!islike(recipe.title)" class="btn btn-danger" v-on:click="like(recipe.title)" style="background-color: #de2e1c; border-color: #de2e1c; border-radius: 0.25rem;"><i class="fa fa-bookmark" aria-hidden="true"></i> Favorite</button>
               <button v-else class="btn btn-danger" v-on:click="unlike(recipe.title)" style="background-color: white; border-color: #de2e1c; border-radius: 0.25rem;">
-                <font color="#de2e1c"><i class="fa fa-bookmark" aria-hidden="true"></i>Remove
+                <font color="#de2e1c"><i class="fa fa-bookmark" aria-hidden="true"></i> Remove
               </button>
             </div>
             <div class="btn-group">
               <button class="btn btn-success" v-on:click="save_item"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                <font color="white">Buy Ingredients</font>
+                <font color="white"> Buy Ingredients</font>
               </button>
             </div><br />
 
