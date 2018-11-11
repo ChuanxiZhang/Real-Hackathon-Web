@@ -117,7 +117,7 @@ new Vue({
       if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate() + ",detail,like, the recipe" + "\"" + title + "\"");
+      this.history.push(getNowFormatDate() + ",detail,like,the recipe" + "\"" + title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
       if (localStorage.getItem('favor') != null) {
         this.favor = JSON.parse(localStorage.getItem("favor"));
@@ -166,7 +166,7 @@ new Vue({
       if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate() + ",detail,cancel, the recipe" + "\"" + title + "\"");
+      this.history.push(getNowFormatDate() + ",detail,cancel,the recipe" + "\"" + title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
     },
     itemUrl() {

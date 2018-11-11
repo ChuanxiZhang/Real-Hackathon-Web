@@ -152,7 +152,7 @@ new Vue({
       if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate() + " ,home,like, the recipe" + "\"" + title + "\"");
+      this.history.push(getNowFormatDate() + " ,home,like,the recipe" + "\"" + title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
       if (localStorage.getItem('favor') != null) {
         this.saved = JSON.parse(localStorage.getItem("favor"));
