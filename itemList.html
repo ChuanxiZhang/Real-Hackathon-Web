@@ -96,15 +96,13 @@
                   <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion3">
                     <div class="card-body">
                       <div v-for="item in historyList">
-                        <span v-if="item.page == 'home'"><i class="fa fa-home" aria-hidden="true"></i></span>
-                        <span v-else-if="item.page == 'detail'"><i class="fa fa-info-circle" aria-hidden="true"></i></span>
-                        <span style="color:red;">{{item.time}}</span>
-                        <span v-if="item.type == 'like'"><i class="fa fa-thumbs-up" aria-hidden="true"></i>{{item.type}} </span>
-                        <span v-else-if="item.type == 'cancel'"><i class="fa fa-thumbs-down" aria-hidden="true"></i>{{item.type}} </span>
-                        <span v-else-if="item.type == 'save'"><i class="fa fa-bookmark" aria-hidden="true"></i>{{item.type}} </span>
+                        <span v-if="item.type == 'like'"><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+                        <span v-else-if="item.type == 'cancel'"><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
+                        <span v-else-if="item.type == 'save'"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
                         <span v-else><i class="fa fa-search" aria-hidden="true"></i></span>
-
-                        <span>{{item.content}}</span>
+                        <span style="color:#007bff;">{{item.time}}: </span>
+                        <span v-if="item.type != 'none'">{{item.type}} {{item.content}}</span>
+                        <span v-else="item.type != 'none'">{{item.content}}</span>
                       </li>
                     </div>
                   </div>
