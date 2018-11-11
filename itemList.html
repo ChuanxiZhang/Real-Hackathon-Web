@@ -57,9 +57,8 @@
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand" href="#">
         <img src="img/logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
-        <div class="col-12 col-md-10 col-lg-8">
-          <a class="navbar-brand" href="index.html" style="position: absolute; left: 50%;"><img height="40" src="img/title.png" class="d-inline-block align-top" alt=""></a>
-        </div>
+        <a class="navbar-brand" href="index.html"><img height="40" src="img/title.png" class="d-inline-block align-top" alt=""></a>
+        <a class="btn btn-primary" href="#" style="background-color: #de2e1c; border-color: #de2e1c;">Contact Us</a>
       </a>
     </nav>
 
@@ -81,7 +80,7 @@
             <h1>Jenny White</h1>
             <div><span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span></div><br/>
 
-            <div id="accordion">
+            <div id="accordion1">
               <div class="card">
                 <div class="card-header" id="headingOne">
                   <h5 class="mb-0">
@@ -91,15 +90,18 @@
                   </h5>
                 </div>
 
-              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion1">
                 <div class="card-body">
-                  <div><span align=width=50%>Ingredients name</span> <span width=50%>Quantity</span></div>
+                  <div><span align=width=50% style="color: #c2ad81;">Ingredients name x Quantity</span></div>
                   <div v-for="ingredient in ingredientList">
-                    <span align=width=50%>{{ingredient.name}}</span> <span width=50%>{{ingredient.num}}</span>
+                    <span align=width=50%><i class="fa fa-shopping-basket" aria-hidden="true"></i>
+{{ingredient.name}}</span><span></span><span>  x </span><span width=50%>{{ingredient.num}}</span>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div id="accordion2">
             <div class="card">
               <div class="card-header" id="headingTwo">
                 <h5 class="mb-0">
@@ -108,14 +110,17 @@
                   </button>
                 </h5>
               </div>
-              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion2">
                 <div class="card-body">
-                  <div><span align=width=50%>Recipe name</span> <span width=50%>Quantity</span></div>
+                  <div><span align=width=50% style="color: #de2e1c;">Ingredients name x Quantity</span></div>
                   <div v-for="favor in favorList">
-                    <span align=width=50%>{{favor.name}}</span> <span width=50%>{{favor.num}}</span>
+                    <span align=width=50%><i class="fa fa-coffee" aria-hidden="true"></i>
+{{favor.name}}</span><span></span><span>  x </span><span width=50%>{{favor.num}}</span>
                   </div>
                 </div>
               </div>
+            </div>
+            <div id="accordion3">
               <div class="card">
                 <div class="card-header" id="headingThree">
                   <h5 class="mb-0">
@@ -124,7 +129,7 @@
                     </button>
                   </h5>
                 </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion3">
                   <div class="card-body">
                       <li v-for="item in historyList">{{item}}</li>
                   </div>

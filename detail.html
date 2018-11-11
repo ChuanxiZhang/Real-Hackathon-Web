@@ -36,8 +36,8 @@
     <!-- Navigation -->
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand" href="#">
-        <img src="img/logo.png" width="70" height="30" class="d-inline-block align-top" alt="">
-        <a class="navbar-brand" href="index.html">USC1024 Recipe Search System</a>
+        <img src="img/logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
+        <a class="navbar-brand" href="index.html"><img height="40" src="img/title.png" class="d-inline-block align-top" alt=""></a>
         <a class="btn btn-primary" :href="itemUrl()" style="background-color: #de2e1c; border-color: #de2e1c;">Item List</a>
       </a>
     </nav>
@@ -87,14 +87,16 @@
             <div class="btn-group">
               <button class="btn btn-success" v-on:click="save_item"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 <font color="white">Buy Ingredients</font></button>
+            </div><br/>
+
+            <div style="padding-right:4%; padding-top:5%">
+                <a v-on:click="serving += 1" style="color: black;"><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a>
+                <span style="padding-right:8%; padding-left:5%; color: black;">{{serving}}</span>
+                <a v-if="serving > 1" v-on:click="serving -= 1" style="color: black;"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+                <a v-else disabled style="color: black;"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
             </div>
-            <div  style="padding-right:5%; padding-top:2%">
-                <button class="btn btn-danger" v-on:click="serving += 1"><i class="fa fa-plus" aria-hidden="true"></i></i></button>
-                <span style="padding-right:5%; padding-left:5%">{{serving}}</span>
-                <button v-if="serving > 1" class="btn btn-danger" v-on:click="serving -= 1"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                <button v-else disabled class="btn btn-danger"><i class="fa fa-minus" aria-hidden="true"></i></button>
-            </div>
-            <br/><br/>
+
+            <br/>
             <div class="col-lg-0"><i class="fa fa-home" aria-hidden="true" style="color: #de2e1c;"></i><a :href="getPublisherUrl" style="color: #de2e1c;">{{getPublisher}}</a></div><br/>
             <div class="col-lg-0"><i class="fa fa-book" aria-hidden="true" style="color: #c2ad81;"></i>&nbsp<a :href="getSourceUrl" style="color: #c2ad81;">Cook Tutorial</a></div><br/>
 
