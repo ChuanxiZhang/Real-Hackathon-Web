@@ -1,58 +1,30 @@
-<!-- <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>My list</title>
-    <link rel="shortcut icon" href="img/small_logo.png" type="image/x-icon">
-    <script src="js/vue.js"></script>
-  </head>
-  <body>
-    <div id ="item_vue">
-      <a @click="getList()">Item list</a>
-      <p v-for="item in list">{{item}}</p>
-      <a @click="getFavor()">Recipe list</a>
-      <p v-for="item in favorList">{{item}}</p>
-      <a @click="getHistory()">History list</a>
-      <p v-for="item in historyList">{{item}}</p>
-    </div>
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="js/ajax.js"></script>
-    <script src="js/itemList.js"></script>
-  </body>
-</html> -->
-
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="referrer" content ="never">
-    <title>Item List</title>
-    <link rel="shortcut icon" href="img/small_logo.png" type="image/x-icon">
+<html lang="en">
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="referrer" content="never">
+  <title>Item List</title>
+  <link rel="shortcut icon" href="img/small_logo.png" type="image/x-icon">
 
-    <!-- Custom fonts for this template -->
-    <!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> -->
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-    <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="css/landing-page.css" rel="stylesheet">
-    <script src="js/vue.js"></script>
-  </head>
+  <!-- Custom fonts for this template -->
+  <link href="css/landing-page.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-  <body>
+</head>
+<body>
   <div id="fb-root"></div>
 
-  <div id ="item_vue">
+  <div id="item_vue">
     <!-- Navigation -->
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand" href="#">
@@ -62,24 +34,17 @@
       </a>
     </nav>
 
-    <!-- <p>{{recipe.publisher}}</p>
-    <p>{{recipe.recipe_id}}</p> -->
-
-
     <!-- Image Showcases -->
     <section class="showcase">
       <div class="container-fluid p-0">
         <div class="row no-gutters">
-          <!-- should change variable in url() in {{recipt.image_url}}-->
           <div class="col-lg-6 text-white showcase-img">
             <img src="img/bg-profile.jpg" height=360px style="position: absolute; top: 120px; right: 60px;"></img>
-            <!-- <img v-else src="http://static.food2fork.com/Jalapeno2BPopper2BGrilled2BCheese2BSandwich2B12B500fd186186.jpg" height=400px style="position: absolute; top: 120px; right: 60px;"></img> -->
           </div>
 
           <div class="col-lg-6 my-auto showcase-text">
             <h1>Jenny White</h1>
-            <div><span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span></div><br/>
-
+            <div><span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></span></div><br />
             <div id="accordion1">
               <div class="card">
                 <div class="card-header" id="headingOne">
@@ -90,60 +55,59 @@
                   </h5>
                 </div>
 
-              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion1">
-                <div class="card-body">
-                  <div><span align=width=50% style="color: #c2ad81;">Ingredients name x Quantity</span></div>
-                  <div v-for="ingredient in ingredientList">
-                    <span align=width=50%><i class="fa fa-shopping-basket" aria-hidden="true"></i>
-{{ingredient.name}}</span><span></span><span>  x </span><span width=50%>{{ingredient.num}}</span>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion1">
+                  <div class="card-body">
+                    <div><span align=width=50% style="color: #c2ad81;">Ingredients name x Quantity</span></div>
+                    <div v-for="ingredient in ingredientList">
+                      <span align=width=50%><i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                        {{ingredient.name}}</span><span></span><span> x </span><span width=50%>{{ingredient.num}}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div id="accordion2">
-            <div class="card">
-              <div class="card-header" id="headingTwo">
-                <h5 class="mb-0">
-                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne" style="color: #de2e1c;">
-                    <a id="collapseTwo_arrow" @click="getFavor()"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp<strong>Recipe List</strong></a>
-                  </button>
-                </h5>
-              </div>
-              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion2">
-                <div class="card-body">
-                  <div><span align=width=50% style="color: #de2e1c;">Recipe name</span></div>
-                  <div v-for="favor in favorList">
-                    <span align=width=50%><i class="fa fa-coffee" aria-hidden="true"></i>{{favor.name}}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div id="accordion3">
+            <div id="accordion2">
               <div class="card">
-                <div class="card-header" id="headingThree">
+                <div class="card-header" id="headingTwo">
                   <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      <a id="collapseThree_arrow" @click="getHistory()"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp<strong>Your History</strong></a>
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne" style="color: #de2e1c;">
+                      <a id="collapseTwo_arrow" @click="getFavor()"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp<strong>Recipe List</strong></a>
                     </button>
                   </h5>
                 </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion3">
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion2">
                   <div class="card-body">
-                      <li v-for="item in historyList">{{item}}</li>
+                    <div><span align=width=50% style="color: #de2e1c;">Recipe name</span></div>
+                    <div v-for="favor in favorList">
+                      <span align=width=50%><i class="fa fa-coffee" aria-hidden="true"></i>{{favor.name}}</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div><br/>
-
-            <div class="btn-group">
-              <button class="btn btn-success" href="#">
-                <font color="white"><i class="fa fa-check" aria-hidden="true"></i>Checkout</font></button>
+              <div id="accordion3">
+                <div class="card">
+                  <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <a id="collapseThree_arrow" @click="getHistory()"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp<strong>Your History</strong></a>
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion3">
+                    <div class="card-body">
+                      <li v-for="item in historyList">{{item}}</li>
+                    </div>
+                  </div>
+                </div>
+              </div><br />
+              <div class="btn-group">
+                <button class="btn btn-success" href="#">
+                  <font color="white"><i class="fa fa-check" aria-hidden="true"></i>Checkout</font>
+                </button>
+              </div>
             </div>
-
           </div>
         </div>
-      </div>
     </section>
 
     <!-- Footer -->
@@ -168,7 +132,7 @@
                 <a href="#" style="color: #de2e1c;">Privacy Policy</a>
               </li>
             </ul>
-            <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2018. All Rights Reserved.</p>
+            <p class="text-muted small mb-4 mb-lg-0">&copy; USC1024 Website 2018. All Rights Reserved.</p>
           </div>
           <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
             <ul class="list-inline mb-0">
@@ -193,18 +157,12 @@
       </div>
     </footer>
   </div>
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="js/ajax.js"></script>
-    <script src="js/itemList.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/zh_CN/sdk.js#xfbml=1&version=v3.2';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-  </body>
+  <script src="js/vue.js"></script>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="js/itemList.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+</body>
+
 </html>

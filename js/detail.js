@@ -11,32 +11,6 @@ function GetRequest() {
   return theRequest;
 }
 
-function getNowFormatDate() {
-    var date = new Date();
-    var seperator1 = "-";
-    var seperator2 = ":";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-            + " " + date.getHours() + seperator2 + date.getMinutes()
-            + seperator2 + date.getSeconds();
-    return currentdate;
-}
-
-function copy (array) {
-   let newArray = []
-   for(let item of array) {
-      newArray.push(item);
-   }
-   return  newArray;
-}
-
 Vue.component('five-star', {
   template: '<span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></span>'
 })
@@ -64,83 +38,84 @@ Vue.component('twohalf-star', {
 Vue.component('two-star', {
   template: '<span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></span>'
 })
+
 new Vue({
   el: '#detail_vue',
   data: {
     recipe: {},
-    saved:[],
-    favor:[],
-    history:[],
+    saved: [],
+    favor: [],
+    history: [],
     showloading: true,
-    serving:1,
+    serving: 1,
   },
-  computed:{
-    getPublisher(){
-      return this.recipe.publisher?this.recipe.publisher:"No publisher";
+  computed: {
+    getPublisher() {
+      return this.recipe.publisher ? this.recipe.publisher : "No publisher";
     },
-    getF2fUrl(){
-      return this.recipe.f2f_url?this.recipe.f2f_url:"error_page.html";
+    getF2fUrl() {
+      return this.recipe.f2f_url ? this.recipe.f2f_url : "error_page.html";
     },
-    getTitle(){
-      return this.recipe.title?this.recipe.title:"No title";
+    getTitle() {
+      return this.recipe.title ? this.recipe.title : "No title";
     },
-    getSourceUrl(){
-      return this.recipe.source_url?this.recipe.source_url:"error_page.html";
+    getSourceUrl() {
+      return this.recipe.source_url ? this.recipe.source_url : "error_page.html";
     },
-    getRecipe_id(){
-      return this.recipe.recipe_id?this.recipe.recipe_id:0;
+    getRecipe_id() {
+      return this.recipe.recipe_id ? this.recipe.recipe_id : 0;
     },
-    getImageUrl(){
-      return this.recipe.image_url?this.recipe.image_url:"img/noImage.jpg";
+    getImageUrl() {
+      return this.recipe.image_url ? this.recipe.image_url : "img/noImage.jpg";
     },
-    getSocialRank(){
-      return this.recipe.social_rank?this.recipe.social_rank:0;
+    getSocialRank() {
+      return this.recipe.social_rank ? this.recipe.social_rank : 0;
     },
-    getPublisherUrl(){
-      return this.recipe.publisher_url?this.recipe.publisher_url:"error_page.html";
+    getPublisherUrl() {
+      return this.recipe.publisher_url ? this.recipe.publisher_url : "error_page.html";
     }
   },
-  methods:{
+  methods: {
     save_item() {
-      if (localStorage.getItem('history') != null){
+      if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate()+" [detail page]save ingredients of " + "\"" + this.recipe.title + "\"");
+      this.history.push(getNowFormatDate() + " [detail page]save ingredients of " + "\"" + this.recipe.title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
       var ingredients = copy(this.recipe.ingredients);
       ingredients.push(this.serving);
       localStorage.setItem(this.recipe.recipe_id, JSON.stringify(ingredients));
     },
-    like(title){
-      if (localStorage.getItem('history') != null){
+    like(title) {
+      if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate()+" [detail page]like the recipe" + "\"" + title + "\"");
+      this.history.push(getNowFormatDate() + " [detail page]like the recipe" + "\"" + title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
-      if (localStorage.getItem('favor') != null){
+      if (localStorage.getItem('favor') != null) {
         this.favor = JSON.parse(localStorage.getItem("favor"));
         var found = false;
-        for(var i = 0; i< this.favor.length;i++){
+        for (var i = 0; i < this.favor.length; i++) {
           var item = this.favor[i].split("|");
           console.log(item[0]);
-          if (item[0] == title){
+          if (item[0] == title) {
             item[1] = this.serving;
             this.favor[i] = item.join("|");
             found = true;
           }
         }
-        if(!found){
-          this.favor.push(title+"|"+this.serving);
+        if (!found) {
+          this.favor.push(title + "|" + this.serving);
         }
-      } else{
-        this.favor.push(title+"|"+this.serving);
+      } else {
+        this.favor.push(title + "|" + this.serving);
       }
       console.log(this.favor);
 
       localStorage.setItem("favor", JSON.stringify(this.favor));
     },
-    islike(title){
-      if (localStorage.getItem('favor') != null){
+    islike(title) {
+      if (localStorage.getItem('favor') != null) {
         this.favor = JSON.parse(localStorage.getItem("favor"));
       }
       for (var i = 0; i < this.favor.length; i++) {
@@ -150,8 +125,8 @@ new Vue({
       }
       return false;
     },
-    unlike(title){
-      if (localStorage.getItem('favor') != null){
+    unlike(title) {
+      if (localStorage.getItem('favor') != null) {
         this.favor = JSON.parse(localStorage.getItem("favor"));
       }
       for (var i = 0; i < this.favor.length; i++) {
@@ -161,14 +136,38 @@ new Vue({
           break;
         }
       }
-      if (localStorage.getItem('history') != null){
+      if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate()+" [detail page]cancel like the recipe" + "\"" + title + "\"");
+      this.history.push(getNowFormatDate() + " [detail page]cancel like the recipe" + "\"" + title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
     },
-    itemUrl(){
+    itemUrl() {
       return "itemList.html";
+    },
+    getNowFormatDate() {
+      var date = new Date();
+      var seperator1 = "-";
+      var seperator2 = ":";
+      var month = date.getMonth() + 1;
+      var strDate = date.getDate();
+      if (month >= 1 && month <= 9) {
+        month = "0" + month;
+      }
+      if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+      }
+      var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate +
+        " " + date.getHours() + seperator2 + date.getMinutes() +
+        seperator2 + date.getSeconds();
+      return currentdate;
+    },
+    copy(array) {
+      let newArray = []
+      for (let item of array) {
+        newArray.push(item);
+      }
+      return newArray;
     },
   },
   created() {
@@ -183,3 +182,12 @@ new Vue({
 $('#ingredients').click(function() {
   $(this).find('i').toggleClass('fa fa-chevron-right').toggleClass('fa fa-chevron-down');
 });
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = 'https://connect.facebook.net/zh_CN/sdk.js#xfbml=1&version=v3.2';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));

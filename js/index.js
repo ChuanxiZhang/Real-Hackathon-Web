@@ -1,25 +1,3 @@
-$('#ingredients').click(function() {
-  $(this).find('i').toggleClass('fa fa-heart').toggleClass('fa fa-heart');
-});
-
-function getNowFormatDate() {
-    var date = new Date();
-    var seperator1 = "-";
-    var seperator2 = ":";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-            + " " + date.getHours() + seperator2 + date.getMinutes()
-            + seperator2 + date.getSeconds();
-    return currentdate;
-}
-
 Vue.component('five-star', {
   template: '<span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></span>'
 })
@@ -71,9 +49,9 @@ new Vue({
     matchListIndex: null,
     saved: [],
     like_flag: false,
-    history:[],
-    showloading:true,
-    serving:1,
+    history: [],
+    showloading: true,
+    serving: 1,
   },
   computed: {
     getPublisher() {
@@ -118,7 +96,7 @@ new Vue({
     }
   },
   methods: {
-    getData(page){
+    getData(page) {
       this.showloading = true;
       var obj = AJAX([this.name, page], "search");
       this.count = obj.count;
@@ -130,10 +108,10 @@ new Vue({
       this.showloading = false;
     },
     handleSubmit() {
-      if (localStorage.getItem('history') != null){
+      if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate()+" [home page]searched " + "\"" +this.name + "\"");
+      this.history.push(getNowFormatDate() + " [home page]searched " + "\"" + this.name + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
       var obj = AJAX([this.name, this.page], "search");
       this.recipes = obj.recipes;
@@ -141,46 +119,46 @@ new Vue({
     url(id) {
       return "detail.html?id=" + id;
     },
-    click_url(title){
-      if (localStorage.getItem('history') != null){
+    click_url(title) {
+      if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate()+" [home page]scan detials of recipe" + "\"" + title + "\"");
+      this.history.push(getNowFormatDate() + " [home page]scan detials of recipe" + "\"" + title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
     },
     itemUrl() {
       return "itemList.html";
     },
     like(title) {
-      if (localStorage.getItem('history') != null){
+      if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate()+" [home page]like the recipe" + "\"" + title + "\"");
+      this.history.push(getNowFormatDate() + " [home page]like the recipe" + "\"" + title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
-      if (localStorage.getItem('favor') != null){
+      if (localStorage.getItem('favor') != null) {
         this.saved = JSON.parse(localStorage.getItem("favor"));
         var found = false;
-        for(var i = 0; i< this.saved.length;i++){
+        for (var i = 0; i < this.saved.length; i++) {
           var item = this.saved[i].split("|");
           console.log(item[0]);
-          if (item[0] == title){
+          if (item[0] == title) {
             item[1] = this.serving;
             this.saved[i] = item.join("|");
             found = true;
           }
         }
-        if(!found){
-          this.saved.push(title+"|"+this.serving);
+        if (!found) {
+          this.saved.push(title + "|" + this.serving);
         }
-      } else{
-        this.saved.push(title+"|"+this.serving);
+      } else {
+        this.saved.push(title + "|" + this.serving);
       }
       console.log(this.saved);
 
       localStorage.setItem("favor", JSON.stringify(this.saved));
     },
     islike(title) {
-      if (localStorage.getItem('favor') != null){
+      if (localStorage.getItem('favor') != null) {
         this.saved = JSON.parse(localStorage.getItem("favor"));
       }
       for (var i = 0; i < this.saved.length; i++) {
@@ -191,7 +169,7 @@ new Vue({
       return false;
     },
     unlike(title) {
-      if (localStorage.getItem('favor') != null){
+      if (localStorage.getItem('favor') != null) {
         this.saved = JSON.parse(localStorage.getItem("favor"));
       }
       for (var i = 0; i < this.saved.length; i++) {
@@ -201,34 +179,51 @@ new Vue({
           break;
         }
       }
-      if (localStorage.getItem('history') != null){
+      if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate()+" [home page]cancel like the recipe" + "\"" + title + "\"");
+      this.history.push(getNowFormatDate() + " [home page]cancel like the recipe" + "\"" + title + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
     },
     prior() {
       this.page--;
-      if (localStorage.getItem('history') != null){
+      if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate()+" [home page]click \"prior page\" and transfer to " + "\"" + this.page + "\"");
+      this.history.push(getNowFormatDate() + " [home page]click \"prior page\" and transfer to " + "\"" + this.page + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
       var obj = AJAX([this.name, this.page], "search");
       this.recipes = obj.recipes;
     },
     next() {
       this.page++;
-      if (localStorage.getItem('history') != null){
+      if (localStorage.getItem('history') != null) {
         this.history = JSON.parse(localStorage.getItem("history"));
       }
-      this.history.push(getNowFormatDate()+" [home page]click \"next page\" and transfer to " + "\"" + this.page + "\"");
+      this.history.push(getNowFormatDate() + " [home page]click \"next page\" and transfer to " + "\"" + this.page + "\"");
       localStorage.setItem("history", JSON.stringify(this.history));
       var obj = AJAX([this.name, this.page], "search");
       this.recipes = obj.recipes;
     },
     scaleData(num) {
       return num.toFixed(2) + "%";
+    },
+    getNowFormatDate() {
+      var date = new Date();
+      var seperator1 = "-";
+      var seperator2 = ":";
+      var month = date.getMonth() + 1;
+      var strDate = date.getDate();
+      if (month >= 1 && month <= 9) {
+        month = "0" + month;
+      }
+      if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+      }
+      var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate +
+        " " + date.getHours() + seperator2 + date.getMinutes() +
+        seperator2 + date.getSeconds();
+      return currentdate;
     },
     setMatchList() {
       if (this.matchListIndex === null) {
@@ -286,15 +281,16 @@ new Vue({
     this.getData(this.page)
     window.addEventListener('scroll', () => {
       var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
-      if (scrollTop + window.innerHeight + 3000>= document.body.offsetHeight) {
+      if (scrollTop + window.innerHeight + 3000 >= document.body.offsetHeight) {
         if (!this.showloading) {
           this.getData(this.page += 1)
         }
       }
     })
+  },
+  created() {},
+});
 
-  },
-  created() {
-    var self = this;
-  },
+$('#ingredients').click(function() {
+  $(this).find('i').toggleClass('fa fa-heart').toggleClass('fa fa-heart');
 });
