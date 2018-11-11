@@ -112,6 +112,7 @@ new Vue({
       var ingredients = copy(this.recipe.ingredients);
       ingredients.push(this.serving);
       localStorage.setItem(this.recipe.recipe_id, JSON.stringify(ingredients));
+      alert("save success!");
     },
     like(title) {
       if (localStorage.getItem('history') != null) {
