@@ -6,4 +6,4 @@ Champion of the [1st Techbow Hackathon](https://www.chineseinla.com/f/page_viewt
   <img src='img/bg-masthead.jpg' width='900'/>
 </p>
 
-Please check our [slides](https://www.slideshare.net/secret/cmVJXnNw3KinBw) and [document](README.pdf) for more details.
+Please check our [document](README.pdf), [slides](https://www.slideshare.net/secret/cmVJXnNw3KinBw) and [video demo](https://www.youtube.com/watch?v=1tl1mWsFJLc) for more details.
